@@ -1,0 +1,8 @@
+﻿{
+	"tasks": [
+		{
+			"name": "MessageTask",
+			"message": "Hello World"
+		}
+	]
+}
