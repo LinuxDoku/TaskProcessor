@@ -1,8 +1,12 @@
 ﻿using System;
 using TaskProcessor.Queue;
-using TaskProcessor.Tasks;
 using System.IO;
 using Newtonsoft.Json.Linq;
+using TaskProcessor.Contracts;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace TaskProcessor
 {
@@ -21,13 +25,38 @@ namespace TaskProcessor
 				var config = JObject.Parse(configFileText);
 
 				if(config != null) {
-					foreach(var task in config.SelectToken("tasks")) {
-						var taskName = (string)task.SelectToken("name");
-						var taskMessage = (string)task.SelectToken("message");
+					foreach(var taskConfig in config.SelectToken("tasks")) {
+						ITask task = null;
 
-						var messageTask = new MessageTask();
-						messageTask.Message = taskMessage;
-						queue.Add(messageTask);
+						var assemblyName = (string)taskConfig.SelectToken("assembly");
+						var className = (string)taskConfig.SelectToken("class");
+						var argumentList = taskConfig.SelectToken("arguments");
+
+						var type = Type.GetType(className + "," + assemblyName);
+						foreach(var constructor in type.GetConstructors()) {
+							var parameters = constructor.GetParameters();
+							if(parameters.Length == argumentList.Count()) {
+								// try with this constructor
+								try {
+									var arguments = new List<Object>();
+
+									for(var i = 0; i < parameters.Length; i++) {
+										arguments.Add(argumentList[i].ToObject(parameters[i].ParameterType));
+									}
+										
+									task = (ITask)Activator.CreateInstance(type, arguments.ToArray());
+									break;
+								} catch {
+									continue;
+								}
+							}
+						}
+
+						if(task != null) {
+							queue.Add(task);
+						} else {
+							Console.WriteLine("No Task or suiteable constructor found!");
+						}
 					}
 				}
 			}

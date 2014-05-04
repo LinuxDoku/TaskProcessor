@@ -1,8 +1,11 @@
 ﻿{
 	"tasks": [
 		{
-			"name": "MessageTask",
-			"message": "Hello World"
+			"assembly": "TaskProcessor",
+			"class": "TaskProcessor.Tasks.MessageTask",
+			"arguments": [
+				"Hello World"
+			]
 		}
 	]
 }

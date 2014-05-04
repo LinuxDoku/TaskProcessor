@@ -3,8 +3,19 @@ using TaskProcessor.Contracts;
 
 namespace TaskProcessor.Tasks
 {
+	/// <summary>
+	/// A simple task which prints a message to stdout.
+	/// </summary>
 	public class MessageTask : ITask
 	{
+		public MessageTask(string message) {
+			Message = message;
+		}
+
+		/// <summary>
+		/// The message to print.
+		/// </summary>
+		/// <value>The message.</value>
 		public string Message { get; set; }
 
 		#region ITask implementation
