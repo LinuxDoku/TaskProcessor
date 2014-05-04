@@ -1,10 +1,7 @@
 ﻿using System;
-using TaskProcessor.Contracts;
 using TaskProcessor.Queue;
 using TaskProcessor.Tasks;
-using System.Threading;
 using System.IO;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace TaskProcessor

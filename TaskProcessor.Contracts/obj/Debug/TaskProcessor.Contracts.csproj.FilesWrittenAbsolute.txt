@@ -1,0 +1,5 @@
+/Users/martin.lantzsch/Projects/TaskProcessor/TaskProcessor.Contracts/obj/Debug/.NETFramework,Version=v4.0.AssemblyAttribute.cs
+/Users/martin.lantzsch/Projects/TaskProcessor/TaskProcessor.Contracts/bin/Debug/Contracts.dll.mdb
+/Users/martin.lantzsch/Projects/TaskProcessor/TaskProcessor.Contracts/bin/Debug/Contracts.dll
+/Users/martin.lantzsch/Projects/TaskProcessor/TaskProcessor.Contracts/obj/Debug/Contracts.dll
+/Users/martin.lantzsch/Projects/TaskProcessor/TaskProcessor.Contracts/obj/Debug/Contracts.dll.mdb

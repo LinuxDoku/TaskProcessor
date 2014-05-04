@@ -1,10 +1,9 @@
-/Users/martin.lantzsch/Projects/TaskProcessor/TaskProcessor/obj/x86/Debug/.NETFramework,Version=v4.0.AssemblyAttribute.cs
+/Users/martin.lantzsch/Projects/TaskProcessor/TaskProcessor/obj/x86/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/Users/martin.lantzsch/Projects/TaskProcessor/TaskProcessor/bin/Debug/config.json
 /Users/martin.lantzsch/Projects/TaskProcessor/TaskProcessor/bin/Debug/TaskProcessor.exe.mdb
 /Users/martin.lantzsch/Projects/TaskProcessor/TaskProcessor/bin/Debug/TaskProcessor.exe
 /Users/martin.lantzsch/Projects/TaskProcessor/TaskProcessor/obj/x86/Debug/TaskProcessor.exe
 /Users/martin.lantzsch/Projects/TaskProcessor/TaskProcessor/obj/x86/Debug/TaskProcessor.exe.mdb
-/Users/martin.lantzsch/Projects/TaskProcessor/TaskProcessor/obj/x86/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/Users/martin.lantzsch/Projects/TaskProcessor/TaskProcessor/bin/Debug/Newtonsoft.Json.dll
 /Users/martin.lantzsch/Projects/TaskProcessor/TaskProcessor/bin/Debug/Contracts.dll
 /Users/martin.lantzsch/Projects/TaskProcessor/TaskProcessor/bin/Debug/Contracts.dll.mdb
-/Users/martin.lantzsch/Projects/TaskProcessor/TaskProcessor/bin/Debug/Newtonsoft.Json.dll
-/Users/martin.lantzsch/Projects/TaskProcessor/TaskProcessor/bin/Debug/config.json
