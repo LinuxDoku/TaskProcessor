@@ -1,5 +1,8 @@
 .DS_Store
 packages/
-obj/
+obj/Debug/
+obj/Release/
+obj/x86/
+obj/x64/
 Debug/
 Release/

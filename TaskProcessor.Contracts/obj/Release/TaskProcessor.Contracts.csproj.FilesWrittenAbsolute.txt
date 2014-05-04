@@ -1,5 +1,0 @@
-/Users/martin.lantzsch/Projects/TaskProcessor/Contracts/obj/Release/.NETFramework,Version=v4.0.AssemblyAttribute.cs
-/Users/martin.lantzsch/Projects/TaskProcessor/Contracts/bin/Release/Contracts.dll.mdb
-/Users/martin.lantzsch/Projects/TaskProcessor/Contracts/bin/Release/Contracts.dll
-/Users/martin.lantzsch/Projects/TaskProcessor/Contracts/obj/Release/Contracts.dll
-/Users/martin.lantzsch/Projects/TaskProcessor/Contracts/obj/Release/Contracts.dll.mdb
