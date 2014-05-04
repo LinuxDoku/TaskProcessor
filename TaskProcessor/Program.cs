@@ -4,7 +4,6 @@ using System.IO;
 using Newtonsoft.Json.Linq;
 using TaskProcessor.Contracts;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -15,7 +14,7 @@ namespace TaskProcessor
 		public static void Main(string[] args)
 		{
 			var queue = new MemoryQueue();
-			var runner = new TaskRunner(queue);
+			var worker = new Worker(queue);
 
 			// try to read config
 			var configFile = "./config.json";
@@ -32,7 +31,12 @@ namespace TaskProcessor
 						var className = (string)taskConfig.SelectToken("class");
 						var argumentList = taskConfig.SelectToken("arguments");
 
-						var type = Type.GetType(className + "," + assemblyName);
+						var typeName = className;
+						if(assemblyName != null) {
+							typeName = className + "," + assemblyName;
+						}
+
+						var type = Type.GetType(typeName);
 						foreach(var constructor in type.GetConstructors()) {
 							var parameters = constructor.GetParameters();
 							if(parameters.Length == argumentList.Count()) {

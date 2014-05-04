@@ -6,6 +6,12 @@
 			"arguments": [
 				"Hello World"
 			]
+		},
+		{
+			"class": "TaskProcessor.Tasks.MessageTask",
+			"arguments": [
+				"This is a test task execution"
+			]
 		}
 	]
 }
