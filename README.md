@@ -1,4 +1,5 @@
 # TaskProcessor
+[![Build Status](https://travis-ci.org/LinuxDoku/TaskProcessor.svg?branch=master)](https://travis-ci.org/LinuxDoku/TaskProcessor)
 The task processor is a in progress project which is the basement for the new residata platform task
 engine. The project aim is to create a application which can run tasks on the local machine or even in 
 a distributed environment. The tasks should be easy to implement, portable and reuseable.
