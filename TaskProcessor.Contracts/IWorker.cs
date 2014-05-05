@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-
-namespace TaskProcessor.Contracts
+﻿namespace TaskProcessor.Contracts
 {
 	/// <summary>
 	/// Interface for a worker which processes tasks.
