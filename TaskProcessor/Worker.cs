@@ -7,7 +7,7 @@ namespace TaskProcessor
 	/// <summary>
 	/// A simple worker for ITaskQueue.
 	/// </summary>
-	public class Worker
+	public class Worker : IWorker
 	{
 		protected ITaskQueue Queue;
 		protected Thread Thread;
