@@ -1,4 +1,8 @@
+
+# Mac files
 .DS_Store
+
+# C#
 packages/
 obj/Debug/
 obj/Release/
@@ -6,3 +10,6 @@ obj/x86/
 obj/x64/
 Debug/
 Release/
+
+# Xamarin Studio
+.userprefs
