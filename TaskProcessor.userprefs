@@ -1,11 +1,6 @@
 ﻿<Properties GitUserInfo="UsingGIT">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
   <MonoDevelop.Ide.Workbench>
-    <Files>
-      <File FileName="TaskProcessor/Program.cs" Line="32" Column="7" />
-      <File FileName="TaskProcessor/Tasks/MessageTask.cs" Line="36" Column="17" />
-      <File FileName="TaskProcessor/config.json" Line="13" Column="18" />
-    </Files>
     <Pads>
       <Pad Id="MonoDevelop.NUnit.TestPad">
         <State expanded="True" selected="True" />
@@ -16,4 +11,5 @@
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <AuthorInfo Name="Martin Lantzsch" Email="martin.lantzsch@residata.de" Copyright="Copyright 2014 Martin Lantzsch" Company="" Trademark="" />
 </Properties>

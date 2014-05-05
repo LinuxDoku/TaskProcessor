@@ -3,8 +3,6 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{A5952A2D-B78C-4167-9D99-964729A82B7D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>TaskProcessor.Tests</RootNamespace>
