@@ -8,7 +8,7 @@ namespace TaskProcessor.Tests
 		[Test()]
 		public void TestTest()
 		{
-			Assert.True(true);
+			Assert.IsTrue(true);
 		}
 	}
 }
