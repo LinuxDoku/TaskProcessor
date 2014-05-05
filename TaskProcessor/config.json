@@ -1,4 +1,5 @@
 ﻿{
+	"workers": 5,
 	"tasks": [
 		{
 			"assembly": "TaskProcessor",

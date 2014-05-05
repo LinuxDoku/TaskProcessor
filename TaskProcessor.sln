@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskProcessor", "TaskProces
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskProcessor.Contracts", "TaskProcessor.Contracts\TaskProcessor.Contracts.csproj", "{C8E09E16-A774-4527-B023-A060B87B905C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskProcessor.Tests", "TaskProcessor.Tests\TaskProcessor.Tests.csproj", "{A5952A2D-B78C-4167-9D99-964729A82B7D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -15,6 +17,10 @@ Global
 		{86BDE3BE-6EDC-4378-A95B-21EBC527128B}.Debug|x86.Build.0 = Debug|x86
 		{86BDE3BE-6EDC-4378-A95B-21EBC527128B}.Release|x86.ActiveCfg = Release|x86
 		{86BDE3BE-6EDC-4378-A95B-21EBC527128B}.Release|x86.Build.0 = Release|x86
+		{A5952A2D-B78C-4167-9D99-964729A82B7D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A5952A2D-B78C-4167-9D99-964729A82B7D}.Debug|x86.Build.0 = Debug|Any CPU
+		{A5952A2D-B78C-4167-9D99-964729A82B7D}.Release|x86.ActiveCfg = Release|Any CPU
+		{A5952A2D-B78C-4167-9D99-964729A82B7D}.Release|x86.Build.0 = Release|Any CPU
 		{C8E09E16-A774-4527-B023-A060B87B905C}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{C8E09E16-A774-4527-B023-A060B87B905C}.Debug|x86.Build.0 = Debug|Any CPU
 		{C8E09E16-A774-4527-B023-A060B87B905C}.Release|x86.ActiveCfg = Release|Any CPU

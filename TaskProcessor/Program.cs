@@ -6,6 +6,8 @@ using TaskProcessor.Contracts;
 using System.Linq;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Threading.Tasks;
+using System.Net.Mime;
 
 namespace TaskProcessor
 {
@@ -14,7 +16,6 @@ namespace TaskProcessor
 		public static void Main(string[] args)
 		{
 			var queue = new MemoryQueue();
-			var worker = new Worker(queue);
 
 			// try to read config
 			var configFile = "./config.json";
@@ -24,6 +25,21 @@ namespace TaskProcessor
 				var config = JObject.Parse(configFileText);
 
 				if(config != null) {
+					// start workeres
+					var workers = new Action[(int)config.SelectToken("workers")];
+
+					if(workers.Length < 1) {
+						Console.WriteLine("Please add more than one worker to the config!");
+						return;
+					}
+
+					for(var i = 0; i < workers.Length; i++) {
+						workers[i] = () => new Worker(queue);
+					}
+
+					Parallel.Invoke(workers);
+
+					// add tasks to queue
 					foreach(var taskConfig in config.SelectToken("tasks")) {
 						ITask task = null;
 
@@ -59,10 +75,13 @@ namespace TaskProcessor
 						if(task != null) {
 							queue.Add(task);
 						} else {
-							Console.WriteLine("No Task or suiteable constructor found!");
+							Console.WriteLine("No Task or suiteable constructor found! Task Name: '" + task.Name + "'");
 						}
 					}
 				}
+			} else {
+				Console.WriteLine("No 'config.json' found!");
+				return;
 			}
 		}
 	}

@@ -1,5 +1,6 @@
 ﻿using System;
 using TaskProcessor.Contracts;
+using System.Threading;
 
 namespace TaskProcessor.Tasks
 {
@@ -36,6 +37,7 @@ namespace TaskProcessor.Tasks
 		public void Execute()
 		{
 			Console.WriteLine(Message);
+			Thread.CurrentThread.Join(new Random().Next(10000));
 
 			TaskStatus = TaskStatus.SUCCESSFUL;
 		}
