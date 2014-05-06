@@ -12,6 +12,5 @@ So you could even use it on your mac or linux box.
 ```
 git clone https://github.com/LinuxDoku/TaskProcessor
 cd TaskProcessor
-mono .nuget/nuget.exe restore
 xbuild
 ```
