@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{373822
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskProcessor.Api", "TaskProcessor.Api\TaskProcessor.Api.csproj", "{A6E83D06-A369-404A-B42A-90D651EA9DB6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -30,6 +32,10 @@ Global
 		{A5952A2D-B78C-4167-9D99-964729A82B7D}.Debug|x86.Build.0 = Debug|Any CPU
 		{A5952A2D-B78C-4167-9D99-964729A82B7D}.Release|x86.ActiveCfg = Release|Any CPU
 		{A5952A2D-B78C-4167-9D99-964729A82B7D}.Release|x86.Build.0 = Release|Any CPU
+		{A6E83D06-A369-404A-B42A-90D651EA9DB6}.Debug|x86.ActiveCfg = Debug|x86
+		{A6E83D06-A369-404A-B42A-90D651EA9DB6}.Debug|x86.Build.0 = Debug|x86
+		{A6E83D06-A369-404A-B42A-90D651EA9DB6}.Release|x86.ActiveCfg = Release|x86
+		{A6E83D06-A369-404A-B42A-90D651EA9DB6}.Release|x86.Build.0 = Release|x86
 		{C8E09E16-A774-4527-B023-A060B87B905C}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{C8E09E16-A774-4527-B023-A060B87B905C}.Debug|x86.Build.0 = Debug|Any CPU
 		{C8E09E16-A774-4527-B023-A060B87B905C}.Release|x86.ActiveCfg = Release|Any CPU
