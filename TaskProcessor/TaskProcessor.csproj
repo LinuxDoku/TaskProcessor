@@ -43,6 +43,7 @@
     <Compile Include="Queue\MemoryQueue.cs" />
     <Compile Include="Tasks\MessageTask.cs" />
     <Compile Include="Worker.cs" />
+    <Compile Include="TaskExecution.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />

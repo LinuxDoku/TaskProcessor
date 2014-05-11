@@ -1,35 +1,52 @@
-﻿using TaskProcessor.Contracts;
-using System.Threading;
+﻿using System.Threading;
 using System;
+using TaskProcessor.Contracts;
+using System.Runtime.Remoting.Channels;
 
 namespace TaskProcessor
 {
 	/// <summary>
 	/// A simple worker for ITaskQueue.
 	/// </summary>
-	public class Worker : IWorker
+    public class Worker : IWorker
 	{
-		protected ITaskQueue Queue;
 		protected Thread Thread;
 		protected bool Canceled = false;
+        protected WorkerStatus Status = WorkerStatus.WAITING;
 
-		/// <summary>
-		/// Initialize and start the worker.
-		/// </summary>
-		/// <param name="taskQueue">Task queue.</param>
-		public Worker(ITaskQueue taskQueue)
-		{
-			Queue = taskQueue;
-			Start();
-		}
+        public WorkerStatus GetStatus() 
+        {
+            return Status;
+        }
+            
+        public void Execute(ITaskExecution taskExecution)
+        {
+            Thread = new Thread(() =>
+            {
+                Status = WorkerStatus.WORKING;
+                taskExecution.Status = TaskStatus.RUNNING;
+                try
+                {
+                    taskExecution.Task.Execute();
+                    taskExecution.Status = TaskStatus.SUCCESSFUL;
+                }
+                catch (Exception exception)
+                {
+                    taskExecution.Exceptions.Add(exception);
+                    taskExecution.Status = TaskStatus.FAILED;
+                }
+                Status = WorkerStatus.WAITING;
+            });
+            Thread.Start();
+        }
+
 
 		/// <summary>
 		/// Start the worker.
 		/// </summary>
 		public void Start()
 		{
-			Thread = new Thread(Work);
-			Thread.Start();
+            throw new NotImplementedException();
 		}
 
 		/// <summary>
@@ -53,32 +70,6 @@ namespace TaskProcessor
 		/// </summary>
 		public void AbortCancel() {
 			Canceled = false;
-		}
-
-		/// <summary>
-		/// Let the worker do it's job.
-		/// </summary>
-		protected void Work()
-		{
-			ITask task;
-
-			while(true) {
-				while((task = Queue.GetNext()) != null) {
-					try {
-						task.Execute();
-					} catch {
-						task.TaskStatus = TaskStatus.FAILED;
-					}
-				}
-
-				if(Canceled) {
-					Thread.Abort();
-					return;
-				}
-			
-				Console.WriteLine("tickk");
-				Thread.Sleep(500);
-			}
 		}
 	}
 }

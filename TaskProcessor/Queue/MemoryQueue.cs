@@ -1,6 +1,9 @@
 ﻿using TaskProcessor.Contracts;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Collections.Concurrent;
+using System;
 
 namespace TaskProcessor.Queue
 {
@@ -9,47 +12,84 @@ namespace TaskProcessor.Queue
 	/// </summary>
 	public class MemoryQueue : ITaskQueue
 	{
-		protected List<ITask> Tasks;
+        protected Thread Thread;
+        protected List<IWorker> Workers;
+        protected ConcurrentBag<ITaskExecution> Tasks;
 
 		public MemoryQueue()
 		{
-			Tasks = new List<ITask>();
+            Workers = new List<IWorker>();
+            Tasks = new ConcurrentBag<ITaskExecution>();
+
+            Thread = new Thread(Process);
+            Thread.Start();
 		}
 
-		#region ITaskList implementation
+        #region ITaskList implementation
 
-		/// <summary>
-		/// Add a task to the queue.
-		/// </summary>
-		/// <param name="task">Task.</param>
-		public void Add(ITask task)
-		{
-			Tasks.Add(task);
-			task.TaskStatus = TaskStatus.QUEUED;
-		}
 
-		/// <summary>
-		/// Get the next task in the queue.
-		/// </summary>
-		/// <returns>The next.</returns>
-		public ITask GetNext()
-		{
-			var suiteable = Tasks.FirstOrDefault(x => x.TaskStatus == TaskStatus.QUEUED);
-			if(suiteable != null) {
-				suiteable.TaskStatus = TaskStatus.RUNNING;
-			}
-			return suiteable;
-		}
+        public void Add(ITaskExecution task)
+        {
+            task.Status = TaskProcessor.Contracts.TaskStatus.QUEUED;
+            Tasks.Add(task);
+        }
 
-		/// <summary>
-		/// Get all queued tasks.
-		/// </summary>
-		/// <returns>The all.</returns>
-		public List<ITask> GetAll()
-		{
-			return Tasks;
-		}
+        public void Add(IWorker worker) 
+        {
+            Workers.Add(worker);
+        }
+
+        public void SetWorkerStatus(IWorker worker, WorkerStatus workerStatus)
+        {
+            if (!Workers.Contains(worker))
+            {
+                Workers.Add(worker);
+            }
+        }
+            
+        /// <summary>
+        /// Get all queued tasks.
+        /// </summary>
+        /// <returns>The all.</returns>
+        public List<ITaskExecution> GetAll()
+        {
+            return Tasks.ToList();
+        }
+
+        public List<IWorker> GetAllWorkers()
+        {
+            return Workers;
+        }
 
 		#endregion
+
+        protected void Process() 
+        {
+            while (true)
+            {
+                var task = GetNextTask();
+                if (task != null)
+                {
+                    var worker = Workers.FirstOrDefault(x => x.GetStatus() == WorkerStatus.WAITING);
+                    if (worker != null)
+                    {
+                        task.Status = TaskStatus.WAITING;
+                        worker.Execute(task);
+                    } else {
+                        Thread.Sleep(500);
+                    }
+                } else {
+                    Thread.Sleep(500);
+                }
+            }
+        }
+
+        protected ITaskExecution GetNextTask() 
+        {
+            return Tasks.FirstOrDefault(
+                x => x.Status == TaskStatus.QUEUED
+                // TODO: add time specific execution
+            );
+        }
 	}
 }

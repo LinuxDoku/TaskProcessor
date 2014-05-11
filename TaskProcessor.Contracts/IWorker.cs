@@ -5,8 +5,15 @@
 	/// </summary>
 	public interface IWorker
 	{
+        WorkerStatus GetStatus();
+
+        /// <summary>
+        /// Execute a Task.
+        /// </summary>
+        void Execute(ITaskExecution taskExecution);
+
 		/// <summary>
-		/// Start the worker.
+        /// Start the worker. (After it was stopped).
 		/// </summary>
 		void Start();
 

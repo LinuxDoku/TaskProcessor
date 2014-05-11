@@ -6,20 +6,14 @@
 	public interface ITask
 	{
 		/// <summary>
-		/// Get the task's name.
+        /// A tasks unique identifier.
 		/// </summary>
 		/// <value>The name.</value>
 		string Name { get; }
 
 		/// <summary>
-		/// Execute this task. And change the task status if it was successful.
+		/// Execute this task.
 		/// </summary>
 		void Execute();
-
-		/// <summary>
-		/// Get the current task status.
-		/// </summary>
-		/// <value>The task status.</value>
-		TaskStatus TaskStatus { get; set; }
 	}
 }

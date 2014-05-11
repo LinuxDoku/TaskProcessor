@@ -1,13 +1,13 @@
 ﻿using System;
 using TaskProcessor.Queue;
 using System.IO;
-using Newtonsoft.Json.Linq;
 using TaskProcessor.Contracts;
 using System.Linq;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Net.Mime;
+using Newtonsoft.Json.Linq;
 
 namespace TaskProcessor
 {
@@ -34,10 +34,11 @@ namespace TaskProcessor
 					}
 
 					for(var i = 0; i < workers.Length; i++) {
-						workers[i] = () => new Worker(queue);
+                        queue.Add(new Worker());
+                        workers[i] = () => new Worker();
 					}
 
-					Parallel.Invoke(workers);
+                    //Parallel.Invoke(workers);
 
 					// add tasks to queue
 					foreach(var taskConfig in config.SelectToken("tasks")) {
@@ -73,7 +74,8 @@ namespace TaskProcessor
 						}
 
 						if(task != null) {
-							queue.Add(task);
+                            var taskExecution = new TaskExecution(task);
+                            queue.Add(taskExecution);
 						} else {
 							Console.WriteLine("No Task or suiteable constructor found! Task Name: '" + task.Name + "'");
 						}

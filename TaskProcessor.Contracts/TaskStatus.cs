@@ -15,6 +15,11 @@
 		/// </summary>
 		QUEUED,
 
+        /// <summary>
+        /// Waiting for execution after removal from queue.
+        /// </summary>
+        WAITING,
+
 		/// <summary>
 		/// The task execution is running at the moment.
 		/// </summary>

@@ -32,21 +32,13 @@ namespace TaskProcessor.Tasks
 		}
 
 		/// <summary>
-		/// Execute this task. And change the task status if it was successful.
+		/// Execute this task.
 		/// </summary>
 		public void Execute()
 		{
 			Console.WriteLine(Message);
 			Thread.CurrentThread.Join(new Random().Next(10000));
-
-			TaskStatus = TaskStatus.SUCCESSFUL;
 		}
-
-		/// <summary>
-		/// Get the current task status.
-		/// </summary>
-		/// <value>The task status.</value>
-		public TaskStatus TaskStatus { get; set; }
 
 		#endregion
 	}

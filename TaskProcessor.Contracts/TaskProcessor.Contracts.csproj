@@ -32,6 +32,8 @@
     <Compile Include="ITaskQueue.cs" />
     <Compile Include="TaskStatus.cs" />
     <Compile Include="IWorker.cs" />
+    <Compile Include="ITaskExecution.cs" />
+    <Compile Include="WorkerStatus.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
