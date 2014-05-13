@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Net.Mime;
 using Newtonsoft.Json.Linq;
+using Microsoft.Owin.Hosting;
 
 namespace TaskProcessor
 {
@@ -85,6 +86,12 @@ namespace TaskProcessor
 				Console.WriteLine("No 'config.json' found!");
 				return;
 			}
+
+            var host = "http://localhost:8080";
+            using(WebApp.Start<Startup>(host)) {
+                Console.WriteLine("Server is running");
+                Console.ReadLine();
+            }
 		}
 	}
 }
