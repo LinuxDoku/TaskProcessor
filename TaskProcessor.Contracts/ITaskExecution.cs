@@ -36,6 +36,6 @@ namespace TaskProcessor.Contracts
         /// A log of the execution.
         /// </summary>
         /// <value>The log.</value>
-        Dictionary<DateTime, string> Log { get; set; }
+        List<ILog> Log { get; }
     }
 }

@@ -8,12 +8,13 @@ namespace TaskProcessor
     {
         protected ITask _task;
         protected TaskStatus _status;
+        protected List<ILog> _log;
 
         public TaskExecution(ITask task)
         {
             _task = task;
 
-            Log = new Dictionary<DateTime, string>();
+            _log = new List<ILog>();
             Exceptions = new List<Exception>();
 
             Status = TaskStatus.INITIAL;
@@ -31,7 +32,7 @@ namespace TaskProcessor
             get { return _status; }  
             set { 
                 _status = value; 
-                Log.Add(DateTime.Now, "Status Changed: '" + value + "'");
+                Log.Add(new Log("Status Changed: '" + value + "'"));
             }
         }
 
@@ -39,7 +40,7 @@ namespace TaskProcessor
 
         public List<Exception> Exceptions { get; set; }
 
-        public Dictionary<DateTime, string> Log { get; set; }
+        public List<ILog> Log { get { return _log; } }
 
         #endregion
     }
