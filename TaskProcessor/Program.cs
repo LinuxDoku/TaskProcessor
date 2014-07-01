@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Net.Mime;
 using Newtonsoft.Json.Linq;
 using Microsoft.Owin.Hosting;
+using System.Net.Sockets;
 
 namespace TaskProcessor
 {
@@ -88,9 +89,17 @@ namespace TaskProcessor
 			}
 
             var host = "http://localhost:8080";
-            using(WebApp.Start<Startup>(host)) {
-                Console.WriteLine("Server is running");
-                Console.ReadLine();
+            try {
+                using(WebApp.Start<Startup>(host)) {
+                    Console.WriteLine("Server is running");
+                    Console.ReadLine();
+                }
+            } catch(TargetInvocationException exception) {
+                if(exception.InnerException.GetType() == typeof(SocketException)) {
+                    Console.WriteLine("Port is already in use!");
+                } else {
+                    Console.WriteLine("Someting went wrong! " + exception.InnerException.Message);
+                }
             }
 		}
 	}
