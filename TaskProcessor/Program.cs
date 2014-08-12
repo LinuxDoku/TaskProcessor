@@ -5,8 +5,6 @@ using TaskProcessor.Contracts;
 using System.Linq;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Threading.Tasks;
-using System.Net.Mime;
 using Newtonsoft.Json.Linq;
 using Microsoft.Owin.Hosting;
 using System.Net.Sockets;
