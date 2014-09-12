@@ -23,7 +23,7 @@ namespace TaskProcessor.Contracts
 		/// Get all queued tasks.
 		/// </summary>
 		/// <returns>List of all queued tasks.<returns>
-        List<ITaskExecution> GetAll();
+        IEnumerable<ITaskExecution> GetAll();
 
         /// <summary>
         /// Set a new worker status (in order to register a worker or to update
@@ -37,6 +37,6 @@ namespace TaskProcessor.Contracts
         /// Get a list of all workers.
         /// </summary>
         /// <returns>The workers.</returns>
-        List<IWorker> GetAllWorkers();
+        IEnumerable<IWorker> GetAllWorkers();
 	}
 }

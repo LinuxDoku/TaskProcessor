@@ -8,7 +8,7 @@ namespace TaskProcessor
     {
         protected ITask _task;
         protected TaskStatus _status;
-        protected List<ILog> _log;
+        protected IList<ILog> _log;
 
         public TaskExecution(ITask task)
         {
@@ -38,9 +38,9 @@ namespace TaskProcessor
 
         public string Output { get; set; }
 
-        public List<Exception> Exceptions { get; set; }
+        public IList<Exception> Exceptions { get; set; }
 
-        public List<ILog> Log { get { return _log; } }
+        public IList<ILog> Log { get { return _log; } }
 
         #endregion
     }

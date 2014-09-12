@@ -30,12 +30,12 @@ namespace TaskProcessor.Contracts
         /// List of exceptions which occoured while the execution.
         /// </summary>
         /// <value>The exceptions.</value>
-        List<Exception> Exceptions { get; set; }
+        IList<Exception> Exceptions { get; set; }
 
         /// <summary>
         /// A log of the execution.
         /// </summary>
         /// <value>The log.</value>
-        List<ILog> Log { get; }
+        IList<ILog> Log { get; }
     }
 }

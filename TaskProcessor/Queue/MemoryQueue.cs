@@ -13,7 +13,7 @@ namespace TaskProcessor.Queue
 	public class MemoryQueue : ITaskQueue
 	{
         protected Thread Thread;
-        protected List<IWorker> Workers;
+        protected IList<IWorker> Workers;
         protected ConcurrentBag<ITaskExecution> Tasks;
 
 		public MemoryQueue()
@@ -51,14 +51,14 @@ namespace TaskProcessor.Queue
         /// Get all queued tasks.
         /// </summary>
         /// <returns>The all.</returns>
-        public List<ITaskExecution> GetAll()
+        public IEnumerable<ITaskExecution> GetAll()
         {
-            return Tasks.ToList();
+            return Tasks.ToArray();
         }
 
-        public List<IWorker> GetAllWorkers()
+        public IEnumerable<IWorker> GetAllWorkers()
         {
-            return Workers;
+            return Workers.ToArray();
         }
 
 		#endregion

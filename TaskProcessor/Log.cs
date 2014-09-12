@@ -12,8 +12,8 @@ namespace TaskProcessor
     /// </summary>
     public class Log : ILog
     {
-        protected DateTime _time;
-        protected string _message;
+        protected readonly DateTime _time;
+        protected readonly string _message;
 
         public Log(string message)
         {
