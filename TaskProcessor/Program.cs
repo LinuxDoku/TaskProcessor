@@ -11,7 +11,7 @@ using System.Net.Sockets;
 
 namespace TaskProcessor
 {
-	class MainClass
+	class Program
 	{
 		public static void Main(string[] args)
 		{
