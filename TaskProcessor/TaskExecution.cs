@@ -13,7 +13,6 @@ namespace TaskProcessor
         public TaskExecution(ITask task)
         {
             _task = task;
-
             _log = new List<ILog>();
             Exceptions = new List<Exception>();
 

@@ -35,6 +35,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TaskManagerTest.cs" />
     <Compile Include="Test.cs" />
     <Compile Include="TaskTest.cs" />
   </ItemGroup>

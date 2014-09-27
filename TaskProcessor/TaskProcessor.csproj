@@ -73,6 +73,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Queue\MemoryQueue.cs" />
     <Compile Include="Tasks\MessageTask.cs" />
+    <Compile Include="Tasks\TaskLoader.cs" />
+    <Compile Include="Tasks\TaskManager.cs" />
     <Compile Include="Worker.cs" />
     <Compile Include="TaskExecution.cs" />
     <Compile Include="Startup.cs" />
