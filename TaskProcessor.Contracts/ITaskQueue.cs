@@ -38,5 +38,8 @@ namespace TaskProcessor.Contracts
         /// </summary>
         /// <returns>The workers.</returns>
         IEnumerable<IWorker> GetAllWorkers();
+
+	    void Add(IEnumerable<IWorker> workers);
+	    void Add(IEnumerable<ITaskExecution> tasks);
 	}
 }

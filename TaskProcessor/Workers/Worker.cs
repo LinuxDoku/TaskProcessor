@@ -2,7 +2,7 @@
 using System;
 using TaskProcessor.Contracts;
 
-namespace TaskProcessor {
+namespace TaskProcessor.Workers {
     /// <summary>
     /// A simple worker for ITaskQueue.
     /// </summary>

@@ -5,6 +5,7 @@ using System.Reflection;
 using Microsoft.Owin.Hosting;
 using System.Net.Sockets;
 using TaskProcessor.Configuration;
+using TaskProcessor.Workers;
 
 namespace TaskProcessor {
     class Program {
@@ -18,20 +19,12 @@ namespace TaskProcessor {
                 var configFileText = File.ReadAllText(configFile);
                 var config = new JsonConfiguration(configFileText);
 
-                // start workeres
-                var workers = new Action[config.Workers];
-
-                if (workers.Length < 1) {
+                if (config.Workers < 1) {
                     Console.WriteLine("Please add more than one worker to the config!");
                     return;
                 }
 
-                for (var i = 0; i < workers.Length; i++) {
-                    queue.Add(new Worker());
-                    workers[i] = () => new Worker();
-                }
-
-                //Parallel.Invoke(workers);
+                queue.Add(WorkerManager.Spawn(config.Workers));
 
                 // add tasks to queue
                 foreach (var task in config.Tasks) {

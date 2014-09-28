@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Collections.Concurrent;
 using System;
+using TaskProcessor.Workers;
 
 namespace TaskProcessor.Queue {
     /// <summary>
@@ -30,8 +31,20 @@ namespace TaskProcessor.Queue {
             _tasks.Add(task);
         }
 
+        public void Add(IEnumerable<ITaskExecution> tasks) {
+            foreach (var task in tasks) {
+                Add(task);
+            }
+        }
+
         public void Add(IWorker worker) {
             _workers.Add(worker);
+        }
+
+        public void Add(IEnumerable<IWorker> workers) {
+            foreach (var worker in workers) {
+                Add(worker);
+            }
         }
 
         public void SetWorkerStatus(IWorker worker, WorkerStatus workerStatus) {
