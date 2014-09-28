@@ -27,6 +27,7 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Configuration\IConfiguration.cs" />
     <Compile Include="ILog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ITask.cs" />

@@ -87,7 +87,6 @@
     <Compile Include="TaskExecution.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Hubs\TasksHub.cs" />
-    <Compile Include="Configuration\IConfiguration.cs" />
     <Compile Include="Configuration\JsonConfiguration.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

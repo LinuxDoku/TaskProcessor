@@ -1,30 +1,33 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TaskProcessor.Contracts;
+using TaskProcessor.Contracts.Configuration;
 
 namespace TaskProcessor.Configuration
 {
     public class JsonConfiguration : IConfiguration
     {
-        private int _workers;
-        private IList<ITask> _tasks;
+        private IList<ITask> _tasks; 
 
         public JsonConfiguration(string jsonString)
         {
             var source = JObject.Parse(jsonString);
-            if (source != null) { 
-                _workers = (int)source.SelectToken("workers");
+            if (source != null)
+            {
+                IsValid = true;
+
+                Workers = (int) source.SelectToken("workers");
                 _tasks = new List<ITask>();
 
                 foreach (var taskConfig in source.SelectToken("tasks"))
                 {
+                    // TODO: move this higher logic to TaskLoader
                     ITask task = null;
 
-                    var assemblyName = (string)taskConfig.SelectToken("assembly");
-                    var className = (string)taskConfig.SelectToken("class");
+                    var assemblyName = (string) taskConfig.SelectToken("assembly");
+                    var className = (string) taskConfig.SelectToken("class");
                     var argumentList = taskConfig.SelectToken("arguments");
 
                     var typeName = className;
@@ -34,48 +37,41 @@ namespace TaskProcessor.Configuration
                     }
 
                     var type = Type.GetType(typeName);
-                    foreach (var constructor in type.GetConstructors())
+                    if (type != null)
                     {
-                        var parameters = constructor.GetParameters();
-                        if (parameters.Length == argumentList.Count())
+                        var constructor = type.GetConstructors()
+                                              .FirstOrDefault(x => x.GetParameters().Length == argumentList.Count());
+
+                        if(constructor != null)
                         {
-                            // try with this constructor
-                            try
-                            {
-                                var arguments = new List<Object>();
+                            var parameters = constructor.GetParameters();
+                            var arguments = new List<Object>();
 
-                                for (var i = 0; i < parameters.Length; i++)
-                                {
-                                    arguments.Add(argumentList[i].ToObject(parameters[i].ParameterType));
-                                }
-
-                                task = (ITask)Activator.CreateInstance(type, arguments.ToArray());
-                            }
-                            catch
+                            for (var i = 0; i < parameters.Length; i++)
                             {
-                                continue;
+                                arguments.Add(argumentList[i].ToObject(parameters[i].ParameterType));
                             }
+
+                            task = (ITask) Activator.CreateInstance(type, arguments.ToArray());
+                            
+                            _tasks.Add(task);
                         }
-
-                        _tasks.Add(task);
+                    }
+                    else
+                    {
+                        IsValid = false;
                     }
                 }
             }
+            else
+            {
+                IsValid = false;
+            }
         }
 
-        #region IConfiguration implementation
-
-        public int Workers
-        {
-            get { return _workers; }
-        }
-
-        public IEnumerable<ITask> Tasks
-        {
-            get { return _tasks; }
-        }
-
-        #endregion
+        public bool IsValid { get; private set; }
+        public int Workers { get; private set; }
+        public IEnumerable<ITask> Tasks { get { return _tasks; } }
     }
 }
 
