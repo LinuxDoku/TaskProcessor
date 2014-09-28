@@ -6,9 +6,9 @@ namespace TaskProcessor
 {
     public class TaskExecution : ITaskExecution
     {
-        protected ITask _task;
-        protected TaskStatus _status;
-        protected readonly IList<ILog> _logs;
+        private readonly ITask _task;
+        private TaskStatus _status;
+        private readonly IList<ILog> _logs;
 
         public TaskExecution(ITask task)
         {
@@ -30,7 +30,7 @@ namespace TaskProcessor
             get { return _status; }  
             set { 
                 _status = value; 
-                Log("Status Changed: '" + value + "'");
+                Log(string.Format("Status Changed: {0}", value));
             }
         }
 

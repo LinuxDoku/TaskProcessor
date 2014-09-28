@@ -1,7 +1,6 @@
 ﻿using System.Threading;
 using System;
 using TaskProcessor.Contracts;
-using System.Runtime.Remoting.Channels;
 
 namespace TaskProcessor
 {
