@@ -4,9 +4,9 @@ using System.Reflection;
 namespace TaskProcessor {
     public class DI {
         private static DI _instance;
-        public CompositionHost Container { get; private set; }
+        private CompositionHost Container { get; set; }
 
-        public DI() {
+        private DI() {
             var container = new ContainerConfiguration();
             container.WithAssembly(Assembly.GetExecutingAssembly());
 
