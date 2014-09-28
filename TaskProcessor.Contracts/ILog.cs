@@ -12,7 +12,7 @@ namespace TaskProcessor.Contracts
         DateTime Time { get; }
 
         /// <summary>
-        /// Log message.
+        /// Logs message.
         /// </summary>
         string Message { get; }
     }

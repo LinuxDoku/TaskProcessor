@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TaskProcessor.Contracts;
 
 namespace TaskProcessor
 {
     /// <summary>
-    /// Log entry.
+    /// Logs entry.
     /// </summary>
     public class Log : ILog
     {
@@ -21,13 +17,19 @@ namespace TaskProcessor
             _message = message;
         }
 
+        public Log(Exception exception)
+        {
+            _time = DateTime.Now;
+            _message = exception.ToString();
+        }
+
         /// <summary>
         /// Timestamp when the log entry was created.
         /// </summary>
         public DateTime Time { get { return _time; } }
 
         /// <summary>
-        /// Log message.
+        /// Logs message.
         /// </summary>
         public string Message { get { return _message; } }
     }

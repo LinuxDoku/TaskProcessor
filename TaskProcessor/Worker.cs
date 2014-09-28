@@ -32,7 +32,7 @@ namespace TaskProcessor
                 }
                 catch (Exception exception)
                 {
-                    taskExecution.Exceptions.Add(exception);
+                    taskExecution.Log(exception);
                     taskExecution.Status = TaskStatus.FAILED;
                 }
                 Status = WorkerStatus.WAITING;

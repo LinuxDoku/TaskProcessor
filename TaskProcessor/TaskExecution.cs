@@ -8,13 +8,12 @@ namespace TaskProcessor
     {
         protected ITask _task;
         protected TaskStatus _status;
-        protected IList<ILog> _log;
+        protected readonly IList<ILog> _logs;
 
         public TaskExecution(ITask task)
         {
             _task = task;
-            _log = new List<ILog>();
-            Exceptions = new List<Exception>();
+            _logs = new List<ILog>();
 
             Status = TaskStatus.INITIAL;
         }
@@ -31,15 +30,28 @@ namespace TaskProcessor
             get { return _status; }  
             set { 
                 _status = value; 
-                Log.Add(new Log("Status Changed: '" + value + "'"));
+                Log("Status Changed: '" + value + "'");
             }
         }
 
         public string Output { get; set; }
 
-        public IList<Exception> Exceptions { get; set; }
+        public IEnumerable<ILog> Logs { get { return _logs; } }
 
-        public IList<ILog> Log { get { return _log; } }
+        public void Log(ILog log)
+        {
+            _logs.Add(log);
+        }
+
+        public void Log(string message)
+        {
+            Log(new Log(message));
+        }
+
+        public void Log(Exception exception)
+        {
+            Log(new Log(exception));
+        }
 
         #endregion
     }

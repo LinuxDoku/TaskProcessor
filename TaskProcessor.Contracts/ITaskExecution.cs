@@ -27,15 +27,27 @@ namespace TaskProcessor.Contracts
         string Output { get; set; }
 
         /// <summary>
-        /// List of exceptions which occoured while the execution.
-        /// </summary>
-        /// <value>The exceptions.</value>
-        IList<Exception> Exceptions { get; set; }
-
-        /// <summary>
         /// A log of the execution.
         /// </summary>
         /// <value>The log.</value>
-        IList<ILog> Log { get; }
+        IEnumerable<ILog> Logs { get; }
+
+        /// <summary>
+        /// Write to log.
+        /// </summary>
+        /// <param name="exception"></param>
+        void Log(ILog log);
+
+        /// <summary>
+        /// Logs a message.
+        /// </summary>
+        /// <param name="message"></param>
+        void Log(string message);
+
+        /// <summary>
+        /// Write an exception to log.
+        /// </summary>
+        /// <param name="exception"></param>
+        void Log(Exception exception);
     }
 }
