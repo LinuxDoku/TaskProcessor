@@ -10,9 +10,9 @@
 		},
 		{
 			"class": "TaskProcessor.Tasks.MessageTask",
-			"arguments": [
-				"This is a test task execution"
-			]
+            "arguments": [
+                "This is a test task execution"
+            ]
 		}
 	]
 }

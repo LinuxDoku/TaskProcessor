@@ -1,16 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Composition;
 using TaskProcessor.Contracts;
 
 namespace TaskProcessor.Workers {
-    public class WorkerManager {
-        public static IEnumerable<IWorker> Spawn(int numerOfWorkers) {
+    [Export(typeof(IWorkerManager))]
+    public class WorkerManager : IWorkerManager {
+        public IEnumerable<IWorker> Spawn(int numerOfWorkers) {
             var workers = new List<IWorker>();
 
             for (var i = 0; i <= numerOfWorkers; i++) {
-                workers.Add(new Worker());
+                workers.Add(DI.GetExport<IWorker>());
             }
 
             return workers;
         }
+    }
+
+    public interface IWorkerManager {
+        IEnumerable<IWorker> Spawn(int numerOfWorkers);
     }
 }

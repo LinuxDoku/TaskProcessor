@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TaskProcessor.Contracts;
 using TaskProcessor.Contracts.Configuration;
+using TaskProcessor.Tasks;
 
 namespace TaskProcessor.Configuration {
     public class JsonConfiguration : IConfiguration {
@@ -27,6 +28,7 @@ namespace TaskProcessor.Configuration {
                 }
 
                 // tasks
+                var taskManager = new TaskManager();
                 _tasks = new List<ITask>();
                 if (tasks != null && tasks.HasValues) {
                     foreach (var taskConfig in tasks) {

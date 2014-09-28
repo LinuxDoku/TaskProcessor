@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Composition;
+using System.Threading;
 using System;
 using TaskProcessor.Contracts;
 
@@ -6,6 +7,7 @@ namespace TaskProcessor.Workers {
     /// <summary>
     /// A simple worker for ITaskQueue.
     /// </summary>
+    [Export(typeof(IWorker))]
     public class Worker : IWorker {
         private Thread _thread;
         private bool _canceled = false;

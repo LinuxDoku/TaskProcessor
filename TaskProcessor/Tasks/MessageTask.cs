@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Composition;
 using TaskProcessor.Contracts;
 using System.Threading;
 
@@ -6,6 +7,7 @@ namespace TaskProcessor.Tasks {
     /// <summary>
     /// A simple task which prints a message to stdout.
     /// </summary>
+    [Export(typeof(ITask))]
     public class MessageTask : ITask {
         public MessageTask(string message) {
             Message = message;

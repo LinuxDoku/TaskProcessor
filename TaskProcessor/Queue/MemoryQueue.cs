@@ -1,15 +1,16 @@
-﻿using TaskProcessor.Contracts;
+﻿using System.Composition;
+using TaskProcessor.Contracts;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Collections.Concurrent;
 using System;
-using TaskProcessor.Workers;
 
 namespace TaskProcessor.Queue {
     /// <summary>
     /// In memory task queue.
     /// </summary>
+    [Export(typeof(ITaskQueue))]
     public class MemoryQueue : ITaskQueue {
         private readonly Thread _thread;
         private readonly IList<IWorker> _workers;
