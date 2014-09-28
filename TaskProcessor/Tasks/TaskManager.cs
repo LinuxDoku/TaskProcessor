@@ -2,19 +2,15 @@
 using System.Collections.Generic;
 using TaskProcessor.Contracts;
 
-namespace TaskProcessor.Tasks
-{
-    class TaskManager
-    {
-        protected IDictionary<string, Type> Registry { get; private set; }
+namespace TaskProcessor.Tasks {
+    public class TaskManager {
+        private IDictionary<string, Type> Registry { get; set; }
 
-        public TaskManager()
-        {
+        public TaskManager() {
             Registry = new Dictionary<string, Type>();
         }
 
-        public bool RegisterTask(string taskName, string typeName) 
-        {
+        public bool RegisterTask(string taskName, string typeName) {
             var type = Type.GetType(typeName);
 
             if (type != null) {
@@ -24,8 +20,7 @@ namespace TaskProcessor.Tasks
             return false;
         }
 
-        public bool RegisterTask(string taskName, Type type)
-        {
+        public bool RegisterTask(string taskName, Type type) {
             if (!Registry.ContainsKey(taskName)) {
                 Registry.Add(taskName, type);
             } else {
@@ -35,8 +30,7 @@ namespace TaskProcessor.Tasks
             return true;
         }
 
-        public ITask Create(string taskName, object parameter=null)
-        {
+        public ITask Create(string taskName, object parameter = null) {
             if (Registry.ContainsKey(taskName)) {
                 var type = Registry[taskName];
                 return (ITask)Activator.CreateInstance(type, parameter);

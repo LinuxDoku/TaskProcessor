@@ -2,73 +2,62 @@
 using System;
 using TaskProcessor.Contracts;
 
-namespace TaskProcessor
-{
-	/// <summary>
-	/// A simple worker for ITaskQueue.
-	/// </summary>
-    public class Worker : IWorker
-	{
-		protected Thread Thread;
-		protected bool Canceled = false;
-        protected WorkerStatus Status = WorkerStatus.WAITING;
+namespace TaskProcessor {
+    /// <summary>
+    /// A simple worker for ITaskQueue.
+    /// </summary>
+    public class Worker : IWorker {
+        private Thread _thread;
+        private bool _canceled = false;
+        private WorkerStatus _status = WorkerStatus.WAITING;
 
-        public WorkerStatus GetStatus() 
-        {
-            return Status;
+        public WorkerStatus GetStatus() {
+            return _status;
         }
-            
-        public void Execute(ITaskExecution taskExecution)
-        {
-            Thread = new Thread(() =>
-            {
-                Status = WorkerStatus.WORKING;
+
+        public void Execute(ITaskExecution taskExecution) {
+            _thread = new Thread(() => {
+                _status = WorkerStatus.WORKING;
                 taskExecution.Status = TaskStatus.RUNNING;
-                try
-                {
+                try {
                     taskExecution.Task.Execute();
                     taskExecution.Status = TaskStatus.SUCCESSFUL;
-                }
-                catch (Exception exception)
-                {
+                } catch (Exception exception) {
                     taskExecution.Log(exception);
                     taskExecution.Status = TaskStatus.FAILED;
                 }
-                Status = WorkerStatus.WAITING;
+                _status = WorkerStatus.WAITING;
             });
-            Thread.Start();
+            _thread.Start();
         }
 
 
-		/// <summary>
-		/// Start the worker.
-		/// </summary>
-		public void Start()
-		{
+        /// <summary>
+        /// Start the worker.
+        /// </summary>
+        public void Start() {
             throw new NotImplementedException();
-		}
+        }
 
-		/// <summary>
-		/// Stop the worker. Now.
-		/// </summary>
-		public void Stop()
-		{
-			Thread.Abort();
-		}
+        /// <summary>
+        /// Stop the worker. Now.
+        /// </summary>
+        public void Stop() {
+            _thread.Abort();
+        }
 
-		/// <summary>
-		/// Cancels the worker execution when it's work is done.
-		/// </summary>
-		public void Cancel()
-		{
-			Canceled = true;
-		}
+        /// <summary>
+        /// Cancels the worker execution when it's work is done.
+        /// </summary>
+        public void Cancel() {
+            _canceled = true;
+        }
 
-		/// <summary>
-		/// Abort a prior worker cancel.
-		/// </summary>
-		public void AbortCancel() {
-			Canceled = false;
-		}
-	}
+        /// <summary>
+        /// Abort a prior worker cancel.
+        /// </summary>
+        public void AbortCancel() {
+            _canceled = false;
+        }
+    }
 }

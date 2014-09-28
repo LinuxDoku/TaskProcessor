@@ -25,6 +25,8 @@ namespace TaskProcessor
             get { return _task; }
         }
 
+        public DateTime StartTime { get; set; }
+
         public TaskStatus Status
         {
             get { return _status; }  

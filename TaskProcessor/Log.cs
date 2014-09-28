@@ -1,24 +1,20 @@
 ﻿using System;
 using TaskProcessor.Contracts;
 
-namespace TaskProcessor
-{
+namespace TaskProcessor {
     /// <summary>
     /// Logs entry.
     /// </summary>
-    public class Log : ILog
-    {
-        protected readonly DateTime _time;
-        protected readonly string _message;
+    public class Log : ILog {
+        private readonly DateTime _time;
+        private readonly string _message;
 
-        public Log(string message)
-        {
+        public Log(string message) {
             _time = DateTime.Now;
             _message = message;
         }
 
-        public Log(Exception exception)
-        {
+        public Log(Exception exception) {
             _time = DateTime.Now;
             _message = exception.ToString();
         }

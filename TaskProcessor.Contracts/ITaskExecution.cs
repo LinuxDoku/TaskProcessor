@@ -21,6 +21,11 @@ namespace TaskProcessor.Contracts
         TaskStatus Status { get; set; }
 
         /// <summary>
+        /// The tasks start time.
+        /// </summary>
+        DateTime StartTime { get; set; }
+
+        /// <summary>
         /// Console output of the task execution.
         /// </summary>
         /// <value>The console output.</value>
