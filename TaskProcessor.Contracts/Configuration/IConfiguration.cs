@@ -5,11 +5,6 @@ namespace TaskProcessor.Contracts.Configuration
     public interface IConfiguration
     {
         /// <summary>
-        /// Is the configuration valid?
-        /// </summary>
-        bool IsValid { get; }
-
-        /// <summary>
         /// Number of worker instances on this machine.
         /// </summary>
         /// <value>The workers.</value>

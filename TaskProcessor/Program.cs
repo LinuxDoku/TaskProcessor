@@ -25,35 +25,30 @@ namespace TaskProcessor
                 var configFileText = File.ReadAllText(configFile);
                 var config = new JsonConfiguration(configFileText);
 
-			    if (config.IsValid)
+			    // start workeres
+			    var workers = new Action[config.Workers];
+
+			    if (workers.Length < 1)
 			    {
-			        // start workeres
-			        var workers = new Action[config.Workers];
-
-			        if (workers.Length < 1)
-			        {
-			            Console.WriteLine("Please add more than one worker to the config!");
-			            return;
-			        }
-
-			        for (var i = 0; i < workers.Length; i++)
-			        {
-			            queue.Add(new Worker());
-			            workers[i] = () => new Worker();
-			        }
-
-			        //Parallel.Invoke(workers);
-
-			        // add tasks to queue
-			        foreach (var task in config.Tasks)
-			        {
-			            var taskExecution = new TaskExecution(task);
-			            queue.Add(taskExecution);
-			        }
-			    } else {
-			        Console.WriteLine("The config file 'config.json' is invalid!");
+			        Console.WriteLine("Please add more than one worker to the config!");
 			        return;
 			    }
+
+			    for (var i = 0; i < workers.Length; i++)
+			    {
+			        queue.Add(new Worker());
+			        workers[i] = () => new Worker();
+			    }
+
+			    //Parallel.Invoke(workers);
+
+			    // add tasks to queue
+			    foreach (var task in config.Tasks)
+			    {
+			        var taskExecution = new TaskExecution(task);
+			        queue.Add(taskExecution);
+			    }
+
 			} else {
 				Console.WriteLine("No 'config.json' found!");
 				return;

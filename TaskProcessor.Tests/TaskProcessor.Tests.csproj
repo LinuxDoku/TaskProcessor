@@ -39,6 +39,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigurationTest.cs" />
     <Compile Include="LogTest.cs" />
     <Compile Include="TaskManagerTest.cs" />
     <Compile Include="Test.cs" />
