@@ -108,7 +108,7 @@
     <Compile Include="Tasks\TaskManager.cs" />
     <Compile Include="Workers\Worker.cs" />
     <Compile Include="TaskExecution.cs" />
-    <Compile Include="Startup.cs" />
+    <Compile Include="OwinStartup.cs" />
     <Compile Include="Hubs\TasksHub.cs" />
     <Compile Include="Configuration\JsonConfiguration.cs" />
     <Compile Include="Workers\WorkerManager.cs" />

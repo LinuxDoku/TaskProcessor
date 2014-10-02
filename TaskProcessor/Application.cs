@@ -41,7 +41,7 @@ namespace TaskProcessor {
 
             var host = "http://localhost:8080";
             try {
-                using (WebApp.Start<Startup>(host)) {
+                using (WebApp.Start<OwinStartup>(host)) {
                     Console.WriteLine("Server is running");
                     Console.ReadLine();
                 }
