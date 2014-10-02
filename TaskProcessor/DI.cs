@@ -47,7 +47,7 @@ namespace TaskProcessor {
                     foreach (var dll in dlls) {
                         var assembly = Assembly.LoadFrom(dll);
 
-                        if (assembly.ExportedTypes.Contains(typeof (ITask))) {
+                        if (assembly.ExportedTypes.Any(x => x.GetInterfaces().Contains(typeof(ITask)))) {
                             container.WithAssembly(assembly);
                         }
                     }
