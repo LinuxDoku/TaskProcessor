@@ -49,7 +49,7 @@ namespace TaskProcessor.Tasks {
 
             try {
                 type = assembly.GetType(typeName);
-            } catch (Exception ex) { }
+            } catch (Exception) { }
 
             return type;
         }

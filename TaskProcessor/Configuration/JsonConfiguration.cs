@@ -56,8 +56,7 @@ namespace TaskProcessor.Configuration {
 
                                 try {
                                     task = (ITask)Activator.CreateInstance(type, args.ToArray());
-                                } catch (Exception ex) {
-                                }
+                                } catch (Exception) {}
 
                                 if (task != null) {
                                     _tasks.Add(task);
