@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Composition;
+using System.Linq;
 using TaskProcessor.Contracts;
 
 namespace TaskProcessor.Tasks {
-    public class TaskManager {
+    [Export(typeof(ITaskManager))]
+    [Shared]
+    public class TaskManager : ITaskManager {
         private IDictionary<string, Type> Registry { get; set; }
 
         public TaskManager() {
@@ -37,6 +41,10 @@ namespace TaskProcessor.Tasks {
             }
 
             return null;
+        }
+
+        public IEnumerable<string> GetAll() {
+            return Registry.Select(x => x.Key);
         }
     }
 }
