@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using Microsoft.AspNet.SignalR.Client;
 
 namespace TaskProcessor.Client
@@ -13,13 +14,22 @@ namespace TaskProcessor.Client
         private static async void Client() {
             var connection = new HubConnection("http://localhost:8080");
             IHubProxy hub = connection.CreateHubProxy("TasksHub");
-            await connection.Start();
+            connection.Start().Wait();
 
-            var results = await hub.Invoke<IEnumerable<string>>("GetTasks");
+            Thread.Sleep(1000);
 
-            foreach (var res in results) {
-                Console.WriteLine(res);
-            }
+            hub.Invoke<IEnumerable<string>>("GetTasks").ContinueWith(task => {
+                if (task.IsFaulted) {
+                    Console.WriteLine(task.Exception.Message);
+                    return;
+                }
+
+                foreach (var result in task.Result) {
+                    Console.WriteLine(result);
+                }
+            });
+
+            connection.Stop();
 
             Console.ReadLine();
         }
