@@ -1,25 +1,27 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNet.SignalR.Client;
-using System.Reflection.Emit;
-using System.Net.Configuration;
-using Microsoft.AspNet.SignalR.Client.Transports;
-using System.Runtime.Remoting.Channels;
-using System.Threading;
 
 namespace TaskProcessor.Client
 {
     class MainClass
     {
-        public static void Main(string[] args)
-        {
+        public static void Main(string[] args) {
+            Client();
+        }
+
+        private static async void Client() {
             var connection = new HubConnection("http://localhost:8080");
             IHubProxy hub = connection.CreateHubProxy("TasksHub");
-            hub.On("SendMessage", msg => Console.WriteLine("test"));
-            connection.Start().Wait();
+            await connection.Start();
 
-            Thread.Sleep(1000);
+            var results = await hub.Invoke<IEnumerable<string>>("GetTasks");
 
-            hub.Invoke("GetTasks").Wait();
+            foreach (var res in results) {
+                Console.WriteLine(res);
+            }
+
+            Console.ReadLine();
         }
     }
 }

@@ -59,5 +59,11 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TaskProcessor.Contracts\TaskProcessor.Contracts.csproj">
+      <Project>{c8e09e16-a774-4527-b023-a060b87b905c}</Project>
+      <Name>TaskProcessor.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
 </Project>
