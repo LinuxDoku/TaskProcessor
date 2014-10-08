@@ -1,21 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Composition;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using TaskProcessor.Contracts;
 using TaskProcessor.Contracts.Hubs;
-using System.Linq;
-using System;
 
 namespace TaskProcessor.Hubs
 {
     [HubName("TasksHub")]
-    public class TasksHub : Hub
+    [Export]
+    [Shared]
+    public class TasksHub : Hub, ITasksHub
     {
+        private readonly ITaskManager _taskManager;
+
+        [ImportingConstructor]
+        public TasksHub(ITaskManager taskManager) {
+            _taskManager = taskManager;
+        }
+
         public IEnumerable<string> GetTasks()
         {
-            var result =  DI.GetExport<ITaskManager>().GetAll();
-
+            //var result = _taskManager.GetAll();
+            var result = new List<string>() {"test"};
             return result;
         }
     }

@@ -34,6 +34,14 @@ namespace TaskProcessor {
             return DI.GetInstance().Container.GetExport<T>();
         }
 
+        public static object GetExport(Type type) {
+            object export;
+            if (DI.GetInstance().Container.TryGetExport(type, out export)) {
+                return export;
+            }
+            return null;
+        }
+
         /// <summary>
         /// Load task assemblies from a specified path.
         /// </summary>

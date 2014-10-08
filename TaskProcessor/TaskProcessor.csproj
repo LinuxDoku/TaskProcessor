@@ -105,6 +105,8 @@
     <Compile Include="Log.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queue\MemoryQueue.cs" />
+    <Compile Include="Signalr\HubActivator.cs" />
+    <Compile Include="Signalr\SignalrDependencyResolver.cs" />
     <Compile Include="Tasks\MessageTask.cs" />
     <Compile Include="Tasks\TaskLoader.cs" />
     <Compile Include="Tasks\TaskManager.cs" />
