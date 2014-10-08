@@ -1,12 +1,16 @@
-﻿using NUnit.Framework;
+﻿using System;
+using System.Threading;
+using NUnit.Framework;
 using System.Composition;
 using System.Composition.Hosting;
 
 namespace TaskProcessor.Tests.Regression
 {
     [TestFixture]
-    public class MefSharedBugRegressionTest
-    {
+    public class MefSharedBugRegressionTest {
+        private static CompositionHost Container;
+
+        [Export]
         [Shared]
         private class SharedManager
         {
@@ -24,9 +28,14 @@ namespace TaskProcessor.Tests.Regression
             var containerConfiguration = new ContainerConfiguration();
             containerConfiguration.WithPart<SharedManager>();
 
-            var container = containerConfiguration.CreateContainer();
+            Container = containerConfiguration.CreateContainer();
 
-            Assert.AreSame(1, container.GetExport<SharedManager>().GetCounter());
+            Assert.AreEqual(1, Container.GetExport<SharedManager>().GetCounter());
+            Assert.AreEqual(2, Container.GetExport<SharedManager>().GetCounter());
+
+            new Thread(() => {
+                Assert.AreEqual(3, Container.GetExport<SharedManager>().GetCounter());
+            }).Start();
         }
     }
 }
