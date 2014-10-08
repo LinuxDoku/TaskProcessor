@@ -27,7 +27,7 @@ namespace TaskProcessor.Client
                 foreach (var result in task.Result) {
                     Console.WriteLine(result);
                 }
-            });
+            }).Wait();
 
             connection.Stop();
 

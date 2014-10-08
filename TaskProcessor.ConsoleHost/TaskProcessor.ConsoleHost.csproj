@@ -60,6 +60,7 @@
       <Project>{86bde3be-6edc-4378-a95b-21ebc527128b}</Project>
       <Name>TaskProcessor</Name>
       <EmbedInteropTypes>False</EmbedInteropTypes>
+      <OutputItemType>true</OutputItemType>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

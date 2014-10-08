@@ -13,7 +13,7 @@ namespace TaskProcessor {
     [Shared]
     public class Application : IApplication {
         [ImportingConstructor]
-        public Application(ITaskQueue taskQueue, IWorkerManager workerManager) {
+        public Application(ITaskQueue taskQueue, IWorkerManager workerManager){ 
             // try to read config
             var configFile = "./config.json";
 
