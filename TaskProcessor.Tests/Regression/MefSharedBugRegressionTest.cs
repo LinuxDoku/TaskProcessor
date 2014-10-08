@@ -10,9 +10,13 @@ namespace TaskProcessor.Tests.Regression
     public class MefSharedBugRegressionTest {
         private static CompositionHost Container;
 
-        [Export]
+        private interface ISharedManager {
+            int GetCounter();
+        }
+
+        [Export(typeof(ISharedManager))]
         [Shared]
-        private class SharedManager
+        private class SharedManager : ISharedManager
         {
             private int _counter = 0;
 
@@ -30,11 +34,11 @@ namespace TaskProcessor.Tests.Regression
 
             Container = containerConfiguration.CreateContainer();
 
-            Assert.AreEqual(1, Container.GetExport<SharedManager>().GetCounter());
-            Assert.AreEqual(2, Container.GetExport<SharedManager>().GetCounter());
+            Assert.AreEqual(1, Container.GetExport<ISharedManager>().GetCounter());
+            Assert.AreEqual(2, Container.GetExport<ISharedManager>().GetCounter());
 
             new Thread(() => {
-                Assert.AreEqual(3, Container.GetExport<SharedManager>().GetCounter());
+                Assert.AreEqual(3, Container.GetExport<ISharedManager>().GetCounter());
             }).Start();
         }
     }
