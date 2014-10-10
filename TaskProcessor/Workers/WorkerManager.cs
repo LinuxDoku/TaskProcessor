@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Composition;
+﻿using System.Collections.Generic;
 using TaskProcessor.Contracts;
+using TaskProcessor.DI;
+using TaskProcessor.DI.Attributes;
 
 namespace TaskProcessor.Workers {
     [Export(typeof(IWorkerManager))]
@@ -10,7 +10,7 @@ namespace TaskProcessor.Workers {
             var workers = new List<IWorker>();
 
             for (var i = 0; i <= numerOfWorkers; i++) {
-                workers.Add(DI.GetExport<IWorker>());
+                workers.Add(Container.GetExport<IWorker>());
             }
 
             return workers;

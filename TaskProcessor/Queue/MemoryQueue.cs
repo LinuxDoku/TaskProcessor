@@ -1,10 +1,10 @@
-﻿using System.Composition;
-using TaskProcessor.Contracts;
+﻿using TaskProcessor.Contracts;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Collections.Concurrent;
 using System;
+using TaskProcessor.DI.Attributes;
 
 namespace TaskProcessor.Queue {
     /// <summary>

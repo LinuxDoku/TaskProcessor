@@ -1,18 +1,18 @@
 ﻿using System;
-using System.Composition;
 using System.IO;
 using System.Net.Sockets;
 using System.Reflection;
 using Microsoft.Owin.Hosting;
 using TaskProcessor.Configuration;
 using TaskProcessor.Contracts;
+using TaskProcessor.DI.Attributes;
 using TaskProcessor.Workers;
 
 namespace TaskProcessor {
     [Export(typeof(IApplication))]
     [Shared]
     public class Application : IApplication {
-        [ImportingConstructor]
+        [Import]
         public Application(ITaskQueue taskQueue, IWorkerManager workerManager){ 
             // try to read config
             var configFile = "./config.json";

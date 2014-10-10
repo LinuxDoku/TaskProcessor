@@ -1,7 +1,7 @@
-﻿using System.Composition;
-using System.Threading;
+﻿using System.Threading;
 using System;
 using TaskProcessor.Contracts;
+using TaskProcessor.DI.Attributes;
 
 namespace TaskProcessor.Workers {
     /// <summary>

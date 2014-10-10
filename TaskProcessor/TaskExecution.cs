@@ -1,9 +1,11 @@
 ﻿using System;
 using TaskProcessor.Contracts;
 using System.Collections.Generic;
+using TaskProcessor.DI.Attributes;
 
 namespace TaskProcessor
 {
+    [Export(typeof(ITaskExecution))]
     public class TaskExecution : ITaskExecution
     {
         private readonly ITask _task;

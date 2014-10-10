@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Composition;
 using System.Linq;
 using TaskProcessor.Contracts;
+using TaskProcessor.DI.Attributes;
 
 namespace TaskProcessor.Tasks {
     [Export(typeof(ITaskManager))]

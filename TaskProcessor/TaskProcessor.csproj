@@ -78,28 +78,12 @@
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Composition.AttributedModel">
-      <HintPath>..\packages\Microsoft.Composition.1.0.27\lib\portable-net45+win8+wp8+wpa81\System.Composition.AttributedModel.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Composition.Convention">
-      <HintPath>..\packages\Microsoft.Composition.1.0.27\lib\portable-net45+win8+wp8+wpa81\System.Composition.Convention.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Composition.Hosting">
-      <HintPath>..\packages\Microsoft.Composition.1.0.27\lib\portable-net45+win8+wp8+wpa81\System.Composition.Hosting.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Composition.Runtime">
-      <HintPath>..\packages\Microsoft.Composition.1.0.27\lib\portable-net45+win8+wp8+wpa81\System.Composition.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Composition.TypedParts">
-      <HintPath>..\packages\Microsoft.Composition.1.0.27\lib\portable-net45+win8+wp8+wpa81\System.Composition.TypedParts.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web.Cors">
       <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.2\lib\net45\System.Web.Cors.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application.cs" />
-    <Compile Include="DI.cs" />
     <Compile Include="Embedable.cs" />
     <Compile Include="IApplication.cs" />
     <Compile Include="Log.cs" />
@@ -130,6 +114,10 @@
     <ProjectReference Include="..\TaskProcessor.Contracts\TaskProcessor.Contracts.csproj">
       <Project>{C8E09E16-A774-4527-B023-A060B87B905C}</Project>
       <Name>TaskProcessor.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TaskProcessor.DI\TaskProcessor.DI.csproj">
+      <Project>{E24E7A9B-BBE8-455F-8884-26ACCC4227FD}</Project>
+      <Name>TaskProcessor.DI</Name>
     </ProjectReference>
   </ItemGroup>
   <ProjectExtensions>

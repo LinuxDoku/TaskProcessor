@@ -1,20 +1,20 @@
 ﻿using System.Collections.Generic;
-using System.Composition;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using TaskProcessor.Contracts;
 using TaskProcessor.Contracts.Hubs;
+using TaskProcessor.DI.Attributes;
 
 namespace TaskProcessor.Hubs
 {
     [HubName("TasksHub")]
-    [Export]
-    [Shared]
+    [Export(typeof(TasksHub))]
+    //[Shared]
     public class TasksHub : Hub, ITasksHub
     {
         private readonly ITaskManager _taskManager;
 
-        [ImportingConstructor]
+        [Import]
         public TasksHub(ITaskManager taskManager) {
             _taskManager = taskManager;
         }

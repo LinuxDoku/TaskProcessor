@@ -1,7 +1,11 @@
-﻿namespace TaskProcessor.ConsoleHost {
+﻿using System.Reflection;
+using TaskProcessor.DI;
+
+namespace TaskProcessor.ConsoleHost {
     public class Program {
         static void Main(string[] args) {
-            DI.GetExport<IApplication>();
+            Container.RegisterAssembly(Assembly.GetAssembly(typeof(IApplication)));
+            Container.GetExport<IApplication>();
         }
     }
 }
