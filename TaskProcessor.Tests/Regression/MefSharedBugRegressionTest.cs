@@ -26,20 +26,40 @@ namespace TaskProcessor.Tests.Regression
             }
         }
 
+        private class DI
+        {
+            private static DI instance = new DI();
+            private CompositionHost _container;
+
+            private DI()
+            {
+                var containerConfiguration = new ContainerConfiguration();
+                containerConfiguration.WithPart<SharedManager>();
+
+                _container = containerConfiguration.CreateContainer();
+            }
+
+            public static T GetExport<T>() {
+                return DI.instance._container.GetExport<T>();
+            }
+        }
+
+        private class ThreadWorker
+        {
+            public static void Work() {
+                Assert.AreEqual(3, DI.GetExport<ISharedManager>().GetCounter());
+            }
+        }
+
         [Test]
         public void SharedTest()
         {
-            var containerConfiguration = new ContainerConfiguration();
-            containerConfiguration.WithPart<SharedManager>();
+            Assert.AreEqual(1, DI.GetExport<ISharedManager>().GetCounter());
+            Assert.AreEqual(2, DI.GetExport<ISharedManager>().GetCounter());
 
-            Container = containerConfiguration.CreateContainer();
+            new Thread(ThreadWorker.Work).Start();
 
-            Assert.AreEqual(1, Container.GetExport<ISharedManager>().GetCounter());
-            Assert.AreEqual(2, Container.GetExport<ISharedManager>().GetCounter());
-
-            new Thread(() => {
-                Assert.AreEqual(3, Container.GetExport<ISharedManager>().GetCounter());
-            }).Start();
+            Assert.AreEqual(4, DI.GetExport<ISharedManager>().GetCounter());
         }
     }
 }
