@@ -115,6 +115,10 @@
       <Project>{C8E09E16-A774-4527-B023-A060B87B905C}</Project>
       <Name>TaskProcessor.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TaskProcessor.DI.Contracts\TaskProcessor.DI.Contracts.csproj">
+      <Project>{84b7e4db-023c-4018-b8d4-978c034a961d}</Project>
+      <Name>TaskProcessor.DI.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TaskProcessor.DI\TaskProcessor.DI.csproj">
       <Project>{E24E7A9B-BBE8-455F-8884-26ACCC4227FD}</Project>
       <Name>TaskProcessor.DI</Name>
