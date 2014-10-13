@@ -1,12 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TaskProcessor.DI.Contracts
-{
-    public interface IExport
-    {
-    }
+﻿namespace TaskProcessor.DI.Contracts {
+    public interface IExport { }
 }

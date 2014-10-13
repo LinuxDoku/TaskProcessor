@@ -1,6 +1,3 @@
-﻿namespace TaskProcessor.DI.Contracts
-{
-    public interface IImport
-    {
-    }
+﻿namespace TaskProcessor.DI.Contracts {
+    public interface IImport { }
 }
