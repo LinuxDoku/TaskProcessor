@@ -7,13 +7,36 @@ using TaskProcessor.Configuration;
 using TaskProcessor.Contracts;
 using TaskProcessor.DI.Attributes;
 using TaskProcessor.Workers;
+using System.Threading;
 
 namespace TaskProcessor {
     [Export(typeof(IApplication))]
     [Shared]
-    public class Application : IApplication {
+    public class Application : IApplication, IDisposable {
+        private readonly ITaskQueue _taskQueue;
+        private readonly IWorkerManager _workerManager;
+
+        private readonly Thread _queueThread;
+        private readonly Thread _signalrThread;
+
         [Import]
-        public Application(ITaskQueue taskQueue, IWorkerManager workerManager){ 
+        public Application(ITaskQueue taskQueue, IWorkerManager workerManager) {
+            _taskQueue = taskQueue;
+            _workerManager = workerManager;
+
+            _queueThread = new Thread(StartQueue);
+            _signalrThread = new Thread(StartSignalr);
+
+            _queueThread.Start();
+            _signalrThread.Start();
+        }
+
+        public void Dispose() {
+            _queueThread.Abort();
+            _signalrThread.Abort();
+        }
+
+        private void StartQueue() {
             // try to read config
             var configFile = "./config.json";
 
@@ -26,19 +49,21 @@ namespace TaskProcessor {
                     return;
                 }
 
-                taskQueue.Add(workerManager.Spawn(config.Workers));
+                _taskQueue.Add(_workerManager.Spawn(config.Workers));
 
                 // add tasks to queue
                 foreach (var task in config.Tasks) {
                     var taskExecution = new TaskExecution(task);
-                    taskQueue.Add(taskExecution);
+                    _taskQueue.Add(taskExecution);
                 }
 
             } else {
                 Console.WriteLine("No 'config.json' found!");
                 return;
             }
+        }
 
+        private void StartSignalr() {
             var host = "http://localhost:8080";
             try {
                 using (WebApp.Start<OwinStartup>(host)) {

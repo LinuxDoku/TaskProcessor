@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using TaskProcessor.DI.Contracts;
 
 namespace TaskProcessor.DI.Attributes {
     [AttributeUsage(AttributeTargets.Constructor)]
-    public class Import : Attribute {
+    public class Import : Attribute, IImport {
     }
 }

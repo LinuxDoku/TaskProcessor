@@ -2,6 +2,8 @@
 using TaskProcessor.Contracts;
 using System.Threading;
 using TaskProcessor.DI.Attributes;
+using TaskProcessor.DI;
+using System.Linq;
 
 namespace TaskProcessor.Tasks {
     /// <summary>

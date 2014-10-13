@@ -6,7 +6,7 @@ using TaskProcessor.DI.Attributes;
 
 namespace TaskProcessor.Tasks {
     [Export(typeof(ITaskManager))]
-    //[Shared]
+    [Shared]
     public class TaskManager : ITaskManager {
         private IDictionary<string, Type> Registry { get; set; }
 

@@ -3,8 +3,14 @@ using System.Linq;
 using System.Reflection;
 using Autofac;
 using TaskProcessor.DI.Attributes;
+using System.Collections.Generic;
 
 namespace TaskProcessor.DI {
+    /// <summary>
+    /// Dependency injection container.
+    /// 
+    /// Allows injection an exporting all services which are declared with an Export attribute.
+    /// </summary>
     public class Container {
         private static Container _instance = new Container();
         private readonly IContainer _container;
@@ -23,10 +29,29 @@ namespace TaskProcessor.DI {
             _container = containerBuilder.Build();
         }
 
+        /// <summary>
+        /// Get a single export for type.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public static T GetExport<T>() {
             return _instance._container.Resolve<T>();
         }
 
+        /// <summary>
+        /// Get all exports for type.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static IEnumerable<T> GetExports<T>() {
+            return GetExport<IEnumerable<T>>();
+        }
+
+        /// <summary>
+        /// Get a single export for type.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static object GetExport(Type type) {
             object result;
             if (_instance._container.TryResolve(type, out result)) {
@@ -35,6 +60,24 @@ namespace TaskProcessor.DI {
             return null;
         }
 
+        /// <summary>
+        /// Get all exports for type.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public static IEnumerable<object> GetExports(Type type)
+        {
+            object results = null;
+            if(_instance._container.TryResolve(typeof(IEnumerable<>).MakeGenericType(type), out results)) {
+                return (IEnumerable<object>)results;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Register all types of the assembly which have an Export attribute.
+        /// </summary>
+        /// <param name="assembly"></param>
         public static void RegisterAssembly(Assembly assembly) {
             if (assembly == null) return;
 

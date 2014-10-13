@@ -11,7 +11,7 @@ namespace TaskProcessor.Client
             Client();
         }
 
-        private static async void Client() {
+        private static void Client() {
             var connection = new HubConnection("http://localhost:8080");
             IHubProxy hub = connection.CreateHubProxy("TasksHub");
             connection.Start().Wait();
