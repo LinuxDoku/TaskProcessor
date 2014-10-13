@@ -59,7 +59,6 @@ namespace TaskProcessor {
 
             } else {
                 Console.WriteLine("No 'config.json' found!");
-                return;
             }
         }
 
