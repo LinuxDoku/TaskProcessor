@@ -1,18 +1,23 @@
 ﻿{
-	"workers": 5,
-	"tasks": [
-		{
-			"assembly": "TaskProcessor",
-			"class": "TaskProcessor.Tasks.MessageTask",
-			"arguments": [
-				"Hello World"
-			]
-		},
-		{
-			"class": "TaskProcessor.Tasks.MessageTask",
+    "communication": {
+        "useHttps": false,
+        "hostname": "localhost",
+        "port":  "8000"
+    },
+    "workers": 5,
+    "tasks": [
+        {
+            "assembly": "TaskProcessor",
+            "class": "TaskProcessor.Tasks.MessageTask",
+            "arguments": [
+                "Hello World"
+            ]
+        },
+        {
+            "class": "TaskProcessor.Tasks.MessageTask",
             "arguments": [
                 "This is a test task execution"
             ]
-		}
-	]
+        }
+    ]
 }

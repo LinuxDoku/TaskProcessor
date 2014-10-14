@@ -1,39 +1,47 @@
 ﻿using System;
+using System.Threading.Tasks;
 using TaskProcessor.Contracts;
 using System.Collections.Generic;
 using TaskProcessor.DI.Attributes;
+using TaskStatus = TaskProcessor.Contracts.TaskStatus;
 
-namespace TaskProcessor
-{
+namespace TaskProcessor {
     [Export(typeof(ITaskExecution))]
-    public class TaskExecution : ITaskExecution
-    {
+    public class TaskExecution : ITaskExecution {
         private readonly ITask _task;
         private TaskStatus _status;
         private readonly IList<ILog> _logs;
 
-        public TaskExecution(ITask task)
-        {
+        public TaskExecution(ITask task) : this(task, DateTime.Now) { }
+
+        public TaskExecution(ITask task, object parameters = null) : this(task, DateTime.Now, parameters) { }
+
+        public TaskExecution(ITask task, DateTime startTime, object parameters=null) {
             _task = task;
             _logs = new List<ILog>();
 
+            TaskExecutionId = Guid.NewGuid();
+            StartTime = startTime;
+            Parameters = parameters;
             Status = TaskStatus.INITIAL;
         }
 
         #region ITaskExecution implementation
 
-        public ITask Task 
-        { 
+        public Guid TaskExecutionId { get; private set; }
+
+        public ITask Task {
             get { return _task; }
         }
 
+        public object Parameters { get; private set; }
+
         public DateTime StartTime { get; set; }
 
-        public TaskStatus Status
-        {
-            get { return _status; }  
-            set { 
-                _status = value; 
+        public TaskStatus Status {
+            get { return _status; }
+            set {
+                _status = value;
                 Log(string.Format("Status Changed: {0}", value));
             }
         }
@@ -42,18 +50,15 @@ namespace TaskProcessor
 
         public IEnumerable<ILog> Logs { get { return _logs; } }
 
-        public void Log(ILog log)
-        {
+        public void Log(ILog log) {
             _logs.Add(log);
         }
 
-        public void Log(string message)
-        {
+        public void Log(string message) {
             Log(new Log(message));
         }
 
-        public void Log(Exception exception)
-        {
+        public void Log(Exception exception) {
             Log(new Log(exception));
         }
 

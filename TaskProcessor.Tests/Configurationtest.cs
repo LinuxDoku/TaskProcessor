@@ -2,6 +2,7 @@
 using System.Linq;
 using NUnit.Framework;
 using TaskProcessor.Configuration;
+using TaskProcessor.Contracts;
 
 namespace TaskProcessor.Tests {
     /// <summary>
@@ -11,10 +12,12 @@ namespace TaskProcessor.Tests {
     class ConfigurationTest {
 
         [Test]
-        public void JsonConfigurationEmptyTest()
-        {
+        public void JsonConfigurationEmptyTest() {
+            var taskManagerMock = new Moq.Mock<ITaskManager>();
+
             var configurationString = "{}";
-            var config = new JsonConfiguration(configurationString);
+            var config = new JsonConfiguration(taskManagerMock.Object);
+            config.Parse(configurationString);
 
             Assert.NotNull(config);
             Assert.AreEqual(config.Workers, 0);
@@ -22,10 +25,12 @@ namespace TaskProcessor.Tests {
         }
 
         [Test]
-        public void JsonConfigurationMissingTasksTest()
-        {
+        public void JsonConfigurationMissingTasksTest() {
+            var taskManagerMock = new Moq.Mock<ITaskManager>();
+
             var configurationString = "{\"workers\": 2}";
-            var config = new JsonConfiguration(configurationString);
+            var config = new JsonConfiguration(taskManagerMock.Object);
+            config.Parse(configurationString);
 
             Assert.NotNull(config);
             Assert.AreEqual(config.Workers, 2);
@@ -35,14 +40,14 @@ namespace TaskProcessor.Tests {
         [Test]
         public void JsonConfigurationInvalidJsonTest()
         {
+            var taskManagerMock = new Moq.Mock<ITaskManager>();
+
             var configurationString = "{\"workers: 2}";
 
-            try
-            {
-                var config = new JsonConfiguration(configurationString);
-            }
-            catch (Exception ex)
-            {
+            try {
+                var config = new JsonConfiguration(taskManagerMock.Object);
+                config.Parse(configurationString);
+            } catch (Exception ex) {
                 Assert.True(ex.Message.ToLower().Contains("invalid configuration"));
                 Assert.Pass();
             }

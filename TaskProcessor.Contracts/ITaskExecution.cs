@@ -1,18 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TaskProcessor.Contracts
-{
+namespace TaskProcessor.Contracts {
     /// <summary>
     /// Protocol of a task execution.
     /// </summary>
-    public interface ITaskExecution
-    {
+    public interface ITaskExecution {
+        /// <summary>
+        /// Id of the task execution.
+        /// </summary>
+        Guid TaskExecutionId { get; }
+
         /// <summary>
         /// Gets the task.
         /// </summary>
         /// <value>The task.</value>
         ITask Task { get; }
+
+        /// <summary>
+        /// Task parameters.
+        /// </summary>
+        object Parameters { get; }
 
         /// <summary>
         /// The current task execution status.

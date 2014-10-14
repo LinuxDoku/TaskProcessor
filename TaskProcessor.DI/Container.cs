@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using Autofac;
+using Autofac.Core;
 using TaskProcessor.DI.Attributes;
 using System.Collections.Generic;
 
@@ -30,7 +31,7 @@ namespace TaskProcessor.DI {
         }
 
         /// <summary>
-        /// Get a single export for type.
+        /// Get single export for type.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>

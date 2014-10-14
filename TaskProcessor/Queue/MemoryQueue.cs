@@ -26,7 +26,10 @@ namespace TaskProcessor.Queue {
 
         #region ITaskList implementation
 
-
+        /// <summary>
+        /// Schuedule a new task.
+        /// </summary>
+        /// <param name="task"></param>
         public void Add(ITaskExecution task) {
             task.Status = TaskStatus.QUEUED;
             _tasks.Add(task);

@@ -4,13 +4,21 @@ using System.Collections.Generic;
 using System.Linq;
 using TaskProcessor.Contracts;
 using TaskProcessor.Contracts.Configuration;
+using TaskProcessor.DI.Attributes;
 using TaskProcessor.Tasks;
 
 namespace TaskProcessor.Configuration {
+    [Export(typeof(IConfiguration))]
     public class JsonConfiguration : IConfiguration {
-        private readonly IList<ITask> _tasks;
+        private IList<ITask> _tasks;
+        private readonly ITaskManager _taskManager;
 
-        public JsonConfiguration(string jsonString) {
+        [Import]
+        public JsonConfiguration(ITaskManager taskManager) {
+            _taskManager = taskManager;
+        }
+
+        public void Parse(string jsonString) {
             JObject source = null;
             try {
                 source = JObject.Parse(jsonString);
@@ -28,7 +36,6 @@ namespace TaskProcessor.Configuration {
                 }
 
                 // tasks
-                var taskManager = new TaskManager();
                 _tasks = new List<ITask>();
                 if (tasks != null && tasks.HasValues) {
                     foreach (var taskConfig in tasks) {
@@ -65,11 +72,23 @@ namespace TaskProcessor.Configuration {
                         }
                     }
                 }
+
+                // communication
+                var communication = source.SelectToken("communication");
+
+                if (communication != null && communication.HasValues) {
+                    UseHttps = (bool)communication.SelectToken("useHttps");
+                    Hostname = (string) communication.SelectToken("hostname");
+                    Port = (short) communication.SelectToken("port");
+                }
             }
         }
 
         public int Workers { get; private set; }
         public IEnumerable<ITask> Tasks { get { return _tasks; } }
+        public bool UseHttps { get; private set; }
+        public string Hostname { get; private set; }
+        public short Port { get; private set; }
     }
 }
 

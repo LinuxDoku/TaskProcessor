@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Contracts.Tasks;
 using TaskProcessor.Contracts;
 using TaskProcessor.DI.Attributes;
 
@@ -8,43 +9,37 @@ namespace TaskProcessor.Tasks {
     [Export(typeof(ITaskManager))]
     [Shared]
     public class TaskManager : ITaskManager {
-        private IDictionary<string, Type> Registry { get; set; }
+        private readonly ITaskRegistry _taskRegistry;
 
-        public TaskManager() {
-            Registry = new Dictionary<string, Type>();
+        [Import]
+        public TaskManager(ITaskRegistry taskRegistry) {
+            _taskRegistry = taskRegistry;
         }
 
-        public bool RegisterTask(string taskName, string typeName) {
-            var type = Type.GetType(typeName);
-
-            if (type != null) {
-                return RegisterTask(taskName, type);
-            }
-
-            return false;
+        public void Register(string typeName) {
+            _taskRegistry.Register(typeName);
         }
 
-        public bool RegisterTask(string taskName, Type type) {
-            if (!Registry.ContainsKey(taskName)) {
-                Registry.Add(taskName, type);
-            } else {
-                Registry[taskName] = type;
-            }
-
-            return true;
+        public void Register(ITask task) {
+            _taskRegistry.Register(task);
         }
 
-        public ITask Create(string taskName, object parameter = null) {
-            if (Registry.ContainsKey(taskName)) {
-                var type = Registry[taskName];
-                return (ITask)Activator.CreateInstance(type, parameter);
+        public ITaskExecution Create(string taskName, object parameter=null) {
+            return Create(taskName, DateTime.Now, parameter);
+        }
+
+        public ITaskExecution Create(string taskName, DateTime dateTime, object parameter=null) {
+            var task = _taskRegistry.Tasks.FirstOrDefault(x => x.Name == taskName);
+
+            if (task != null) {
+                return new TaskExecution(task, dateTime);
             }
 
             return null;
         }
 
-        public IEnumerable<string> GetAll() {
-            return Registry.Select(x => x.Key);
+        public IEnumerable<ITask> GetAll() {
+            return _taskRegistry.Tasks;
         }
     }
 }

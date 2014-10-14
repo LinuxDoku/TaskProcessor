@@ -38,6 +38,7 @@
     <Compile Include="TaskStatus.cs" />
     <Compile Include="IWorker.cs" />
     <Compile Include="ITaskExecution.cs" />
+    <Compile Include="Tasks\ITaskRegistry.cs" />
     <Compile Include="WorkerStatus.cs" />
   </ItemGroup>
   <ItemGroup>
