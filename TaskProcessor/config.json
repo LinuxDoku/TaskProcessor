@@ -2,7 +2,7 @@
     "communication": {
         "useHttps": false,
         "hostname": "localhost",
-        "port":  "8000"
+        "port": 8080
     },
     "workers": 5,
     "tasks": [

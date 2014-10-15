@@ -1,37 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR.Client;
+using TaskProcessor.Contracts;
 
 namespace TaskProcessor.Client
 {
-    class MainClass
+    class MainClass 
     {
         public static void Main(string[] args) {
-            Client();
-        }
-
-        private static void Client() {
-            var connection = new HubConnection("http://localhost:8080");
-            IHubProxy hub = connection.CreateHubProxy("TasksHub");
-            connection.Start().Wait();
-
-            Thread.Sleep(1000);
-
-            hub.Invoke<IEnumerable<string>>("GetTasks").ContinueWith(task => {
-                if (task.IsFaulted) {
-                    Console.WriteLine(task.Exception.Message);
-                    return;
-                }
-
-                foreach (var result in task.Result) {
-                    Console.WriteLine(result);
-                }
-            }).Wait();
-
-            connection.Stop();
+            var task = new Task(Client);
+            task.Start();
+            task.Wait();
 
             Console.ReadLine();
+        }
+
+        private class TaskQueue {
+            public string Name { get; set; }
+        }
+
+        private static async void Client() {
+            var connection = new HubConnection("http://localhost:8080");
+            IHubProxy hub = connection.CreateHubProxy("QueueHub");
+            await connection.Start();
+
+            var queues = await hub.Invoke<IEnumerable<TaskQueue>>("GetAll");
+            foreach (var queue in queues) {
+                Console.WriteLine(queue.Name);
+            }
+
+            connection.Stop();
         }
     }
 }

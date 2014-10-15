@@ -94,11 +94,11 @@
     <Compile Include="Signalr\HubActivator.cs" />
     <Compile Include="Signalr\SignalrDependencyResolver.cs" />
     <Compile Include="Tasks\MessageTask.cs" />
+    <Compile Include="Tasks\TaskExecution.cs" />
     <Compile Include="Tasks\TaskLoader.cs" />
     <Compile Include="Tasks\TaskManager.cs" />
     <Compile Include="Tasks\TaskRegistry.cs" />
     <Compile Include="Workers\Worker.cs" />
-    <Compile Include="TaskExecution.cs" />
     <Compile Include="OwinStartup.cs" />
     <Compile Include="Hubs\TasksHub.cs" />
     <Compile Include="Configuration\JsonConfiguration.cs" />

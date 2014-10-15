@@ -7,6 +7,7 @@ using Microsoft.Owin.Hosting;
 using TaskProcessor.Contracts.Configuration;
 using TaskProcessor.Contracts.Queue;
 using TaskProcessor.DI.Attributes;
+using TaskProcessor.Tasks;
 using TaskProcessor.Workers;
 using System.Threading;
 
@@ -50,10 +51,9 @@ namespace TaskProcessor {
                 _configuration.Parse(configFileText);
 
                 return true;
-            } else {
-                Console.WriteLine("No 'config.json' found!");
             }
-
+            
+            Console.WriteLine("No 'config.json' found!");
             return false;
         }
 

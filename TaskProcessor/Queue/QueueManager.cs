@@ -7,6 +7,7 @@ using TaskProcessor.DI.Attributes;
 
 namespace TaskProcessor.Queue {
     [Export(typeof(IQueueManager))]
+    [Shared]
     public class QueueManager : IQueueManager {
         private readonly IList<ITaskQueue> _queue; 
 

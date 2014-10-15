@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Threading.Tasks;
-using TaskProcessor.Contracts;
 using System.Collections.Generic;
+using TaskProcessor.Contracts;
 using TaskProcessor.DI.Attributes;
-using TaskStatus = TaskProcessor.Contracts.TaskStatus;
 
-namespace TaskProcessor {
+namespace TaskProcessor.Tasks {
     [Export(typeof(ITaskExecution))]
     public class TaskExecution : ITaskExecution {
         private readonly ITask _task;
