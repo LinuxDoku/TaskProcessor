@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.22129.1
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskProcessor", "TaskProcessor\TaskProcessor.csproj", "{86BDE3BE-6EDC-4378-A95B-21EBC527128B}"
 EndProject
@@ -28,6 +28,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskProcessor.ConsoleHost", "TaskProcessor.ConsoleHost\TaskProcessor.ConsoleHost.csproj", "{7799EE5B-1C15-40D1-A54A-EB148F4E58B7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskProcessor.DI", "TaskProcessor.DI\TaskProcessor.DI.csproj", "{E24E7A9B-BBE8-455F-8884-26ACCC4227FD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{84B7E4DB-023C-4018-B8D4-978C034A961D} = {84B7E4DB-023C-4018-B8D4-978C034A961D}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskProcessor.DI.Contracts", "TaskProcessor.DI.Contracts\TaskProcessor.DI.Contracts.csproj", "{84B7E4DB-023C-4018-B8D4-978C034A961D}"
 EndProject

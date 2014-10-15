@@ -8,6 +8,7 @@ using Microsoft.Owin.Hosting;
 using TaskProcessor.Configuration;
 using TaskProcessor.Contracts;
 using TaskProcessor.Contracts.Configuration;
+using TaskProcessor.Contracts.Queue;
 using TaskProcessor.DI.Attributes;
 using TaskProcessor.Workers;
 using System.Threading;
@@ -16,7 +17,7 @@ namespace TaskProcessor {
     [Export(typeof(IApplication))]
     [Shared]
     public class Application : IApplication, IDisposable {
-        private readonly ITaskQueue _taskQueue;
+        private readonly IQueueManager _queueManager;
         private readonly IWorkerManager _workerManager;
         private readonly IConfiguration _configuration;
 
@@ -24,8 +25,8 @@ namespace TaskProcessor {
         private readonly Thread _signalrThread;
 
         [Import]
-        public Application(ITaskQueue taskQueue, IWorkerManager workerManager, IConfiguration configuration) {
-            _taskQueue = taskQueue;
+        public Application(IQueueManager queueManager, IWorkerManager workerManager, IConfiguration configuration) {
+            _queueManager = queueManager;
             _workerManager = workerManager;
             _configuration = configuration;
 
@@ -61,12 +62,13 @@ namespace TaskProcessor {
                 return;
             }
 
-            _taskQueue.Add(_workerManager.Spawn(_configuration.Workers));
+            var queue = _queueManager.Create();
+            queue.Add(_workerManager.Spawn(_configuration.Workers));
 
             // add tasks to queue
             foreach (var task in _configuration.Tasks) {
                 var taskExecution = new TaskExecution(task);
-                _taskQueue.Add(taskExecution);
+                queue.Add(taskExecution);
             }
         }
 

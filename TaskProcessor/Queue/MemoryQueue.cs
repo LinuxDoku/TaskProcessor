@@ -14,17 +14,15 @@ namespace TaskProcessor.Queue {
     public class MemoryQueue : ITaskQueue {
         private readonly Thread _thread;
         private readonly IList<IWorker> _workers;
-        private readonly ConcurrentBag<ITaskExecution> _tasks;
+        private readonly List<ITaskExecution> _tasks;
 
         public MemoryQueue() {
             _workers = new List<IWorker>();
-            _tasks = new ConcurrentBag<ITaskExecution>();
+            _tasks = new List<ITaskExecution>();
 
             _thread = new Thread(Process);
             _thread.Start();
         }
-
-        #region ITaskList implementation
 
         /// <summary>
         /// Schuedule a new task.
@@ -57,19 +55,13 @@ namespace TaskProcessor.Queue {
             }
         }
 
-        /// <summary>
-        /// Get all queued tasks.
-        /// </summary>
-        /// <returns>The all.</returns>
-        public IEnumerable<ITaskExecution> GetAll() {
-            return _tasks.ToArray();
+        public IEnumerable<ITaskExecution> Tasks  {
+            get { return _tasks; }
         }
 
-        public IEnumerable<IWorker> GetAllWorkers() {
-            return _workers.ToArray();
+        public IEnumerable<IWorker> Workers {
+            get { return _workers; }
         }
-
-        #endregion
 
         private void Process() {
             while (true) {
