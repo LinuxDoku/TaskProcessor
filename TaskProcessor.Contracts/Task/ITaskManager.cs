@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace TaskProcessor.Contracts {
+namespace TaskProcessor.Contract.Task {
     public interface ITaskManager {
         void Register(string typeName);
         void Register(ITask task);

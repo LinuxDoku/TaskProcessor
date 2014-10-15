@@ -62,9 +62,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TaskProcessor.Contracts\TaskProcessor.Contracts.csproj">
+    <ProjectReference Include="..\TaskProcessor.Contracts\TaskProcessor.Contract.csproj">
       <Project>{c8e09e16-a774-4527-b023-a060b87b905c}</Project>
-      <Name>TaskProcessor.Contracts</Name>
+      <Name>TaskProcessor.Contract</Name>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </ProjectReference>
   </ItemGroup>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TaskProcessor.Contract.Queue;
 using TaskProcessor.Contracts;
 using TaskProcessor.Contracts.Queue;
 using TaskProcessor.DI;

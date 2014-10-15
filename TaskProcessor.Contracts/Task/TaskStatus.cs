@@ -1,4 +1,4 @@
-﻿namespace TaskProcessor.Contracts
+﻿namespace TaskProcessor.Contract.Task
 {
 	/// <summary>
 	/// Task status indicators for further processing.

@@ -52,9 +52,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TaskProcessor.Contracts\TaskProcessor.Contracts.csproj">
+    <ProjectReference Include="..\TaskProcessor.Contracts\TaskProcessor.Contract.csproj">
       <Project>{c8e09e16-a774-4527-b023-a060b87b905c}</Project>
-      <Name>TaskProcessor.Contracts</Name>
+      <Name>TaskProcessor.Contract</Name>
     </ProjectReference>
     <ProjectReference Include="..\TaskProcessor.DI.Contracts\TaskProcessor.DI.Contracts.csproj">
       <Project>{84b7e4db-023c-4018-b8d4-978c034a961d}</Project>

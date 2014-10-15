@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using TaskProcessor.Contract.Hub;
+using TaskProcessor.Contract.Task;
 using TaskProcessor.Contracts;
-using TaskProcessor.Contracts.Hubs;
 using TaskProcessor.DI.Attributes;
 
 namespace TaskProcessor.Hub {

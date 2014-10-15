@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TaskProcessor.Contract.Queue;
 
 namespace TaskProcessor.Contracts.Queue {
     public interface IQueueManager {

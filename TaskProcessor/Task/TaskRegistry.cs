@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Contracts.Tasks;
+using TaskProcessor.Contract.Task;
 using TaskProcessor.Contracts;
 using TaskProcessor.DI.Attributes;
 

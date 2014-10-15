@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TaskProcessor.Contracts;
 
-namespace Contracts.Tasks {
+namespace TaskProcessor.Contract.Task {
     public interface ITaskRegistry {
         /// <summary>
         /// List of all registered tasks.

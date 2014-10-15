@@ -1,4 +1,6 @@
-﻿namespace TaskProcessor.Contracts
+﻿using TaskProcessor.Contract.Task;
+
+namespace TaskProcessor.Contract.Worker
 {
 	/// <summary>
 	/// Interface for a worker which processes tasks.

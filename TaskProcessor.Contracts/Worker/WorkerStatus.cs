@@ -1,4 +1,4 @@
-﻿namespace TaskProcessor.Contracts
+﻿namespace TaskProcessor.Contract.Worker
 {
     public enum WorkerStatus
     {

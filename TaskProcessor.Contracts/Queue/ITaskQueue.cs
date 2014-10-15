@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
+using TaskProcessor.Contract.Task;
+using TaskProcessor.Contract.Worker;
+using TaskProcessor.Contracts;
 
-namespace TaskProcessor.Contracts {
+namespace TaskProcessor.Contract.Queue {
     /// <summary>
     /// A queue which a set of tasks which have to be executed.
     /// </summary>

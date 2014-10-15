@@ -1,4 +1,4 @@
-﻿namespace TaskProcessor.Contracts
+﻿namespace TaskProcessor.Contract.Task
 {
 	/// <summary>
 	/// A task is a job which can be executed and does whatever the developer want's.

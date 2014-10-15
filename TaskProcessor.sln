@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskProcessor", "TaskProcessor\TaskProcessor.csproj", "{86BDE3BE-6EDC-4378-A95B-21EBC527128B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskProcessor.Contracts", "TaskProcessor.Contracts\TaskProcessor.Contracts.csproj", "{C8E09E16-A774-4527-B023-A060B87B905C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskProcessor.Contract", "TaskProcessor.Contracts\TaskProcessor.Contract.csproj", "{C8E09E16-A774-4527-B023-A060B87B905C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskProcessor.Tests", "TaskProcessor.Tests\TaskProcessor.Tests.csproj", "{A5952A2D-B78C-4167-9D99-964729A82B7D}"
 EndProject
