@@ -55,9 +55,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TaskProcessor.DI.Contracts\TaskProcessor.DI.Contracts.csproj">
+    <ProjectReference Include="..\TaskProcessor.DI.Contracts\TaskProcessor.DI.Contract.csproj">
       <Project>{84b7e4db-023c-4018-b8d4-978c034a961d}</Project>
-      <Name>TaskProcessor.DI.Contracts</Name>
+      <Name>TaskProcessor.DI.Contract</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

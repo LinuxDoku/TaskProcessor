@@ -7,8 +7,8 @@
     <ProjectGuid>{84B7E4DB-023C-4018-B8D4-978C034A961D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TaskProcessor.DI.Contracts</RootNamespace>
-    <AssemblyName>TaskProcessor.DI.Contracts</AssemblyName>
+    <RootNamespace>TaskProcessor.DI.Contract</RootNamespace>
+    <AssemblyName>TaskProcessor.DI.Contract</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

@@ -32,7 +32,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskProcessor.DI", "TaskPro
 		{84B7E4DB-023C-4018-B8D4-978C034A961D} = {84B7E4DB-023C-4018-B8D4-978C034A961D}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskProcessor.DI.Contracts", "TaskProcessor.DI.Contracts\TaskProcessor.DI.Contracts.csproj", "{84B7E4DB-023C-4018-B8D4-978C034A961D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskProcessor.DI.Contract", "TaskProcessor.DI.Contracts\TaskProcessor.DI.Contract.csproj", "{84B7E4DB-023C-4018-B8D4-978C034A961D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
