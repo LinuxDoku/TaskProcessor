@@ -13,4 +13,4 @@ before_install:
 
 script:
  - xbuild
- - nunit-console TaskProcessor.Tests/bin/Debug/TaskProcessor.Tests.dll
+ - ./build/nunit.sh TaskProcessor.Tests/bin/Debug/TaskProcessor.Tests.dll
