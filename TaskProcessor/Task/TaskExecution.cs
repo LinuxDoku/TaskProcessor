@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TaskProcessor.Contracts;
 using TaskProcessor.DI.Attributes;
 
-namespace TaskProcessor.Tasks {
+namespace TaskProcessor.Task {
     [Export(typeof(ITaskExecution))]
     public class TaskExecution : ITaskExecution {
         private readonly ITask _task;

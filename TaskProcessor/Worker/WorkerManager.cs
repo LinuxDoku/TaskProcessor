@@ -3,7 +3,7 @@ using TaskProcessor.Contracts;
 using TaskProcessor.DI;
 using TaskProcessor.DI.Attributes;
 
-namespace TaskProcessor.Workers {
+namespace TaskProcessor.Worker {
     [Export(typeof(IWorkerManager))]
     public class WorkerManager : IWorkerManager {
         public IEnumerable<IWorker> Spawn(int numerOfWorkers) {

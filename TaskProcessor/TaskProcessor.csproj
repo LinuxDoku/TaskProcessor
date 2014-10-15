@@ -85,7 +85,8 @@
   <ItemGroup>
     <Compile Include="Application.cs" />
     <Compile Include="Embedable.cs" />
-    <Compile Include="Hubs\QueueHub.cs" />
+    <Compile Include="Hub\QueueHub.cs" />
+    <Compile Include="Hub\TasksHub.cs" />
     <Compile Include="IApplication.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -93,16 +94,15 @@
     <Compile Include="Queue\QueueManager.cs" />
     <Compile Include="Signalr\HubActivator.cs" />
     <Compile Include="Signalr\SignalrDependencyResolver.cs" />
-    <Compile Include="Tasks\MessageTask.cs" />
-    <Compile Include="Tasks\TaskExecution.cs" />
-    <Compile Include="Tasks\TaskLoader.cs" />
-    <Compile Include="Tasks\TaskManager.cs" />
-    <Compile Include="Tasks\TaskRegistry.cs" />
-    <Compile Include="Workers\Worker.cs" />
     <Compile Include="OwinStartup.cs" />
-    <Compile Include="Hubs\TasksHub.cs" />
     <Compile Include="Configuration\JsonConfiguration.cs" />
-    <Compile Include="Workers\WorkerManager.cs" />
+    <Compile Include="Task\MessageTask.cs" />
+    <Compile Include="Task\TaskExecution.cs" />
+    <Compile Include="Task\TaskLoader.cs" />
+    <Compile Include="Task\TaskManager.cs" />
+    <Compile Include="Task\TaskRegistry.cs" />
+    <Compile Include="Worker\Worker.cs" />
+    <Compile Include="Worker\WorkerManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />

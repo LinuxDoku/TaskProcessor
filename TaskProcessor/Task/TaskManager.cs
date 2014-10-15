@@ -5,7 +5,7 @@ using Contracts.Tasks;
 using TaskProcessor.Contracts;
 using TaskProcessor.DI.Attributes;
 
-namespace TaskProcessor.Tasks {
+namespace TaskProcessor.Task {
     [Export(typeof(ITaskManager))]
     [Shared]
     public class TaskManager : ITaskManager {

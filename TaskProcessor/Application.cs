@@ -7,8 +7,8 @@ using Microsoft.Owin.Hosting;
 using TaskProcessor.Contracts.Configuration;
 using TaskProcessor.Contracts.Queue;
 using TaskProcessor.DI.Attributes;
-using TaskProcessor.Tasks;
-using TaskProcessor.Workers;
+using TaskProcessor.Task;
+using TaskProcessor.Worker;
 using System.Threading;
 
 namespace TaskProcessor {

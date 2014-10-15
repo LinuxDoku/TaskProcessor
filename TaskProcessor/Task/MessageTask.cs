@@ -1,11 +1,9 @@
 ﻿using System;
-using TaskProcessor.Contracts;
 using System.Threading;
+using TaskProcessor.Contracts;
 using TaskProcessor.DI.Attributes;
-using TaskProcessor.DI;
-using System.Linq;
 
-namespace TaskProcessor.Tasks {
+namespace TaskProcessor.Task {
     /// <summary>
     /// A simple task which prints a message to stdout.
     /// </summary>

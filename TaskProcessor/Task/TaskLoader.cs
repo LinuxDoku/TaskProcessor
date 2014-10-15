@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using TaskProcessor.Contracts;
 
-namespace TaskProcessor.Tasks {
+namespace TaskProcessor.Task {
     class TaskLoader {
         public ITask LoadTask(string assembly, string className) {
             return null;

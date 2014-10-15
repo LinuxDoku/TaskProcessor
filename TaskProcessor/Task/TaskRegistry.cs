@@ -5,7 +5,7 @@ using Contracts.Tasks;
 using TaskProcessor.Contracts;
 using TaskProcessor.DI.Attributes;
 
-namespace TaskProcessor.Tasks {
+namespace TaskProcessor.Task {
     [Export(typeof(ITaskRegistry))]
     public class TaskRegistry : ITaskRegistry {
         private readonly IList<ITask> _taskList;

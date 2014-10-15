@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNet.SignalR;
 using TaskProcessor.Contracts;
+using TaskProcessor.Contracts.Hubs;
 using TaskProcessor.Contracts.Queue;
 using TaskProcessor.DI.Attributes;
-using TaskProcessor.Contracts.Hubs;
 
-namespace TaskProcessor.Hubs {
+namespace TaskProcessor.Hub {
     [Export(typeof(QueueHub))]
-    public class QueueHub : Hub, IQueueHub {
+    public class QueueHub : Microsoft.AspNet.SignalR.Hub, IQueueHub {
         private readonly IQueueManager _queueManager;
 
         [Import]

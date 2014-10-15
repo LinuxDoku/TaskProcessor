@@ -1,9 +1,9 @@
-﻿using System.Threading;
-using System;
+﻿using System;
+using System.Threading;
 using TaskProcessor.Contracts;
 using TaskProcessor.DI.Attributes;
 
-namespace TaskProcessor.Workers {
+namespace TaskProcessor.Worker {
     /// <summary>
     /// A simple worker for ITaskQueue.
     /// </summary>

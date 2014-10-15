@@ -5,7 +5,6 @@ using System.Linq;
 using TaskProcessor.Contracts;
 using TaskProcessor.Contracts.Configuration;
 using TaskProcessor.DI.Attributes;
-using TaskProcessor.Tasks;
 
 namespace TaskProcessor.Configuration {
     [Export(typeof(IConfiguration))]
