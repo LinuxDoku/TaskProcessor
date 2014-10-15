@@ -3,7 +3,7 @@ using System.Linq;
 using System.Reflection;
 using Autofac;
 using TaskProcessor.DI.Attributes;
-using ContainerInterface=TaskProcessor.DI.Contracts.IContainer;
+using ContainerInterface=TaskProcessor.DI.Contract.IContainer;
 using System.Collections.Generic;
 
 namespace TaskProcessor.DI {
@@ -12,7 +12,7 @@ namespace TaskProcessor.DI {
     /// 
     /// Allows injection an exporting all services which are declared with an Export attribute.
     /// </summary>
-    public class Container : ContainerInterface {
+    public class Container : Contract.IContainer {
         private static Container _instance = new Container();
         private readonly IContainer _container;
 

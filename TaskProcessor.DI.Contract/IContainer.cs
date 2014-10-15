@@ -1,4 +1,4 @@
-﻿namespace TaskProcessor.DI.Contracts {
+﻿namespace TaskProcessor.DI.Contract {
     public interface IContainer {
         
     }

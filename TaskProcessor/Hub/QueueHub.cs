@@ -2,8 +2,6 @@
 using System.Linq;
 using TaskProcessor.Contract.Hub;
 using TaskProcessor.Contract.Queue;
-using TaskProcessor.Contracts;
-using TaskProcessor.Contracts.Queue;
 using TaskProcessor.DI.Attributes;
 
 namespace TaskProcessor.Hub {

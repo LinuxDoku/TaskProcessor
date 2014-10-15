@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR.Client;
-using TaskProcessor.Contracts;
 
 namespace TaskProcessor.Client
 {

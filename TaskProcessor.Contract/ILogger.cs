@@ -1,4 +1,4 @@
-﻿namespace TaskProcessor.Contracts {
+﻿namespace TaskProcessor.Contract {
     public interface ILogger {
         void Log(string message);
     }

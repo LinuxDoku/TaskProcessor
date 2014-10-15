@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using TaskProcessor.Contract;
 using TaskProcessor.Contract.Task;
-using TaskProcessor.Contracts;
 using TaskProcessor.DI.Attributes;
 
 namespace TaskProcessor.Task {

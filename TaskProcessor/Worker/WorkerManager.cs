@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using TaskProcessor.Contract.Worker;
-using TaskProcessor.Contracts;
 using TaskProcessor.DI;
 using TaskProcessor.DI.Attributes;
 

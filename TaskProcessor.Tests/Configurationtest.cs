@@ -3,7 +3,6 @@ using System.Linq;
 using NUnit.Framework;
 using TaskProcessor.Configuration;
 using TaskProcessor.Contract.Task;
-using TaskProcessor.Contracts;
 
 namespace TaskProcessor.Tests {
     /// <summary>

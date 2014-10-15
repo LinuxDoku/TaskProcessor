@@ -1,5 +1,6 @@
 ﻿using System;
-namespace TaskProcessor.Contracts
+
+namespace TaskProcessor.Contract
 {
     /// <summary>
     /// Interface for log entries.

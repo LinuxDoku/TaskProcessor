@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using TaskProcessor.Contract.Queue;
+﻿using System.Collections.Generic;
 
-namespace TaskProcessor.Contracts.Queue {
+namespace TaskProcessor.Contract.Queue {
     public interface IQueueManager {
         IEnumerable<ITaskQueue> Queues { get; }
         ITaskQueue Create();

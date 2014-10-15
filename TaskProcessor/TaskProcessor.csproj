@@ -114,11 +114,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TaskProcessor.Contracts\TaskProcessor.Contract.csproj">
+    <ProjectReference Include="..\TaskProcessor.Contract\TaskProcessor.Contract.csproj">
       <Project>{C8E09E16-A774-4527-B023-A060B87B905C}</Project>
       <Name>TaskProcessor.Contract</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TaskProcessor.DI.Contracts\TaskProcessor.DI.Contract.csproj">
+    <ProjectReference Include="..\TaskProcessor.DI.Contract\TaskProcessor.DI.Contract.csproj">
       <Project>{84b7e4db-023c-4018-b8d4-978c034a961d}</Project>
       <Name>TaskProcessor.DI.Contract</Name>
     </ProjectReference>

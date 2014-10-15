@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using TaskProcessor.Contract.Task;
 using TaskProcessor.Contract.Worker;
-using TaskProcessor.Contracts;
 
 namespace TaskProcessor.Contract.Queue {
     /// <summary>

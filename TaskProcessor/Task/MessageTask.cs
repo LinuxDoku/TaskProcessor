@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using TaskProcessor.Contract.Task;
-using TaskProcessor.Contracts;
 using TaskProcessor.DI.Attributes;
 
 namespace TaskProcessor.Task {

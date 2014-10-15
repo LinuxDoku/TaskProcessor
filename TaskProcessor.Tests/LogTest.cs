@@ -1,6 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
-using TaskProcessor.Contracts;
+using TaskProcessor.Contract;
 
 namespace TaskProcessor.Tests {
     [TestFixture]

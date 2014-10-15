@@ -2,7 +2,6 @@
 using System.Threading;
 using TaskProcessor.Contract.Task;
 using TaskProcessor.Contract.Worker;
-using TaskProcessor.Contracts;
 using TaskProcessor.DI.Attributes;
 
 namespace TaskProcessor.Worker {

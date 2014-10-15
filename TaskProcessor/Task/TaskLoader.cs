@@ -2,7 +2,6 @@
 using System.IO;
 using System.Reflection;
 using TaskProcessor.Contract.Task;
-using TaskProcessor.Contracts;
 
 namespace TaskProcessor.Task {
     class TaskLoader {

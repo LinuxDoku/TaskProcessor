@@ -1,5 +1,5 @@
 ﻿using System;
-using TaskProcessor.Contracts;
+using TaskProcessor.Contract;
 
 namespace TaskProcessor {
     /// <summary>

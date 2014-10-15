@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using TaskProcessor.Contract.Task;
-using TaskProcessor.Contracts;
 using TaskProcessor.DI.Attributes;
 
 namespace TaskProcessor.Task {

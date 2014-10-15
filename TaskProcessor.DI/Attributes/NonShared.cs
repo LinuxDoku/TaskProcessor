@@ -1,5 +1,5 @@
 ﻿using System;
-using TaskProcessor.DI.Contracts;
+using TaskProcessor.DI.Contract;
 
 namespace TaskProcessor.DI.Attributes
 {

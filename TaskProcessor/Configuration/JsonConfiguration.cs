@@ -2,9 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TaskProcessor.Contract.Configuration;
 using TaskProcessor.Contract.Task;
-using TaskProcessor.Contracts;
-using TaskProcessor.Contracts.Configuration;
 using TaskProcessor.DI.Attributes;
 
 namespace TaskProcessor.Configuration {

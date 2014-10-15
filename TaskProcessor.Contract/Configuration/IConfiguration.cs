@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using TaskProcessor.Contract.Task;
 
-namespace TaskProcessor.Contracts.Configuration
+namespace TaskProcessor.Contract.Configuration
 {
     public interface IConfiguration {
         /// <summary>

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using TaskProcessor.Contracts;
 
 namespace TaskProcessor.Contract.Task {
     public interface ITaskRegistry {

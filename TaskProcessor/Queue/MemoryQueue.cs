@@ -1,11 +1,9 @@
 ﻿using TaskProcessor.Contract.Queue;
 using TaskProcessor.Contract.Task;
 using TaskProcessor.Contract.Worker;
-using TaskProcessor.Contracts;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using System.Collections.Concurrent;
 using System;
 using TaskProcessor.DI.Attributes;
 
