@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IContainer.cs" />
     <Compile Include="IExport.cs" />
     <Compile Include="IImport.cs" />
     <Compile Include="INonShared.cs" />

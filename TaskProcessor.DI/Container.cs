@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Reflection;
 using Autofac;
-using Autofac.Core;
 using TaskProcessor.DI.Attributes;
+using ContainerInterface=TaskProcessor.DI.Contracts.IContainer;
 using System.Collections.Generic;
 
 namespace TaskProcessor.DI {
@@ -12,7 +12,7 @@ namespace TaskProcessor.DI {
     /// 
     /// Allows injection an exporting all services which are declared with an Export attribute.
     /// </summary>
-    public class Container {
+    public class Container : ContainerInterface {
         private static Container _instance = new Container();
         private readonly IContainer _container;
 
@@ -66,9 +66,8 @@ namespace TaskProcessor.DI {
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public static IEnumerable<object> GetExports(Type type)
-        {
-            object results = null;
+        public static IEnumerable<object> GetExports(Type type) {
+            object results;
             if(_instance._container.TryResolve(typeof(IEnumerable<>).MakeGenericType(type), out results)) {
                 return (IEnumerable<object>)results;
             }
