@@ -24,6 +24,8 @@ namespace TaskProcessor.Queue {
             _thread.Start();
         }
 
+        public string Name { get; set; }
+
         /// <summary>
         /// Schuedule a new task.
         /// </summary>

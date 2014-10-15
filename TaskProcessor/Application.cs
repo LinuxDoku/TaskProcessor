@@ -2,11 +2,8 @@
 using System.IO;
 using System.Net.Sockets;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Text;
 using Microsoft.Owin.Hosting;
-using TaskProcessor.Configuration;
-using TaskProcessor.Contracts;
 using TaskProcessor.Contracts.Configuration;
 using TaskProcessor.Contracts.Queue;
 using TaskProcessor.DI.Attributes;
@@ -30,13 +27,13 @@ namespace TaskProcessor {
             _workerManager = workerManager;
             _configuration = configuration;
 
-            ParseConfig();
+            if (ParseConfig()) {
+                _queueThread = new Thread(StartQueue);
+                _signalrThread = new Thread(StartSignalr);
 
-            _queueThread = new Thread(StartQueue);
-            _signalrThread = new Thread(StartSignalr);
-
-            _queueThread.Start();
-            _signalrThread.Start();
+                _queueThread.Start();
+                _signalrThread.Start();
+            }
         }
 
         public void Dispose() {
@@ -44,16 +41,20 @@ namespace TaskProcessor {
             _signalrThread.Abort();
         }
 
-        private void ParseConfig() {
+        private bool ParseConfig() {
             // try to read config
             var configFile = "./config.json";
 
             if (File.Exists(configFile)) {
                 var configFileText = File.ReadAllText(configFile);
                 _configuration.Parse(configFileText);
+
+                return true;
             } else {
                 Console.WriteLine("No 'config.json' found!");
             }
+
+            return false;
         }
 
         private void StartQueue() {

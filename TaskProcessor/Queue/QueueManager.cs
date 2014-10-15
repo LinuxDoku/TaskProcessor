@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TaskProcessor.Contracts;
 using TaskProcessor.Contracts.Queue;
 using TaskProcessor.DI;
@@ -18,7 +19,13 @@ namespace TaskProcessor.Queue {
         }
 
         public ITaskQueue Create() {
+            return Create(Guid.NewGuid().ToString());
+        }
+
+        public ITaskQueue Create(string name) {
             var queue = Container.GetExport<ITaskQueue>();
+            queue.Name = name;
+
             _queue.Add(queue);
 
             return queue;

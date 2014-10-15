@@ -6,6 +6,11 @@ namespace TaskProcessor.Contracts {
     /// </summary>
     public interface ITaskQueue {
         /// <summary>
+        /// Identifier of the task queue.
+        /// </summary>
+        string Name { get; set; }
+
+        /// <summary>
         /// Get all queued tasks.
         /// </summary>
         IEnumerable<ITaskExecution> Tasks { get; }
@@ -27,7 +32,16 @@ namespace TaskProcessor.Contracts {
         /// <param name="worker">Worker.</param>
         void Add(IWorker worker);
 
+        /// <summary>
+        /// Add a list of workers.
+        /// </summary>
+        /// <param name="workers"></param>
         void Add(IEnumerable<IWorker> workers);
+
+        /// <summary>
+        /// Add a list of task executions.
+        /// </summary>
+        /// <param name="tasks"></param>
         void Add(IEnumerable<ITaskExecution> tasks);
 
         /// <summary>

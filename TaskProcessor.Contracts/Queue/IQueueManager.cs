@@ -5,5 +5,6 @@ namespace TaskProcessor.Contracts.Queue {
     public interface IQueueManager {
         IEnumerable<ITaskQueue> Queues { get; }
         ITaskQueue Create();
+        ITaskQueue Create(string name);
     }
 }
