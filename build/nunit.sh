@@ -1,4 +1,4 @@
-#!/bin/sh -x
+#!/bin/sh
 
 mono --runtime=v4.0 .nuget/NuGet.exe install NUnit.Runners -Version 2.6.1 -o packages
 
