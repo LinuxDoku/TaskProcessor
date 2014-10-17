@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
+using TaskProcessor.Contract.Queue;
 using TaskProcessor.Contract.Task;
+using TaskProcessor.DI;
 using TaskProcessor.DI.Attributes;
 
 namespace TaskProcessor.Task {
@@ -36,7 +39,14 @@ namespace TaskProcessor.Task {
         /// </summary>
         public void Execute() {
             Console.WriteLine(Message);
-            Thread.CurrentThread.Join(new Random().Next(10000));
+
+            var queueManager = Container.GetExport<IQueueManager>();
+            var taskManager = Container.GetExport<ITaskManager>();
+            var queue = queueManager.Queues.FirstOrDefault();
+
+            if (queue != null) {
+                queue.Add(taskManager.Create("MessageTask", DateTime.Now.AddSeconds(30), DateTime.Now.ToString()));
+            }
         }
 
         #endregion

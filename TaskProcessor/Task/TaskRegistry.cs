@@ -7,38 +7,49 @@ using TaskProcessor.DI.Attributes;
 namespace TaskProcessor.Task {
     [Export(typeof(ITaskRegistry))]
     public class TaskRegistry : ITaskRegistry {
-        private readonly IList<ITask> _taskList;
+        private readonly IDictionary<string, Type> _tasks;
 
-        public IEnumerable<ITask> Tasks {
-            get { return _taskList; }
+        public IDictionary<string, Type> Tasks {
+            get { return _tasks; }
         }
 
         public TaskRegistry() {
-            _taskList = new List<ITask>();
+            _tasks = new Dictionary<string, Type>();
         }
 
         public void Register(string typeName) {
-            var type = Type.GetType(typeName);
+            Register(Type.GetType(typeName));
+        }
 
-            if (type != null) {
-                var task = (ITask)Activator.CreateInstance(type);
+        public void Register(ITask task) {
+            if(_tasks.All(x => x.Key != task.Name)) {
+                _tasks.Add(task.Name, task.GetType());
+            }
+        }
+
+        public void Register(Type taskType) {
+            if (taskType != null) {
+                var task = (ITask)Activator.CreateInstance(taskType);
                 Register(task);
             }
         }
 
-        public void Register(ITask task) {
-            if(_taskList.All(x => x.Name != task.Name)) {
-                _taskList.Add(task);
-            }
-        }
-
         public void Delete(string taskName) {
-            Delete(_taskList.FirstOrDefault(x => x.Name == taskName));
+            if (_tasks.ContainsKey(taskName)) {
+                _tasks.Remove(taskName);
+            }
         }
 
         public void Delete(ITask task) {
             if (task != null) {
-                _taskList.Remove(task);
+                _tasks.Remove(_tasks.FirstOrDefault());
+            }
+        }
+
+        public void Delete(Type taskType) {
+            var task = _tasks.FirstOrDefault(x => x.Value.Name == taskType.Name);
+            if (string.IsNullOrEmpty(task.Key)) {
+                _tasks.Remove(task);
             }
         }
     }

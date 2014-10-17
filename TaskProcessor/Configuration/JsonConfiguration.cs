@@ -61,13 +61,18 @@ namespace TaskProcessor.Configuration {
                                         .Select((t, i) => argumentList[i].ToObject(t.ParameterType));
 
                                 try {
-                                    task = (ITask)Activator.CreateInstance(type, args.ToArray());
-                                } catch (Exception) {}
+                                    task = (ITask) Activator.CreateInstance(type, args.ToArray());
+                                }
+                                catch (Exception) {
+                                }
 
                                 if (task != null) {
                                     _tasks.Add(task);
                                 }
                             }
+                        }
+                        else {
+                            Console.WriteLine("Task {0} not found!", typeName);
                         }
                     }
                 }

@@ -6,6 +6,7 @@ using System.Text;
 using Microsoft.Owin.Hosting;
 using TaskProcessor.Contract.Configuration;
 using TaskProcessor.Contract.Queue;
+using TaskProcessor.Contract.Task;
 using TaskProcessor.DI.Attributes;
 using TaskProcessor.Task;
 using TaskProcessor.Worker;
@@ -18,14 +19,16 @@ namespace TaskProcessor {
         private readonly IQueueManager _queueManager;
         private readonly IWorkerManager _workerManager;
         private readonly IConfiguration _configuration;
+        private readonly ITaskManager _taskManager;
 
         private readonly Thread _queueThread;
         private readonly Thread _signalrThread;
 
         [Import]
-        public Application(IQueueManager queueManager, IWorkerManager workerManager, IConfiguration configuration) {
+        public Application(IQueueManager queueManager, IWorkerManager workerManager, ITaskManager taskManager, IConfiguration configuration) {
             _queueManager = queueManager;
             _workerManager = workerManager;
+            _taskManager = taskManager;
             _configuration = configuration;
 
             if (ParseConfig()) {
@@ -62,14 +65,14 @@ namespace TaskProcessor {
                 Console.WriteLine("Please add more than one worker to the config!");
                 return;
             }
-
+            
             var queue = _queueManager.Create();
             queue.Add(_workerManager.Spawn(_configuration.Workers));
 
-            // add tasks to queue
+            // register tasks
             foreach (var task in _configuration.Tasks) {
-                var taskExecution = new TaskExecution(task);
-                queue.Add(taskExecution);
+                _taskManager.Register(task);
+                queue.Add(new TaskExecution(task));
             }
         }
 

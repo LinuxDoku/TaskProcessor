@@ -28,17 +28,13 @@ namespace TaskProcessor.Task {
         }
 
         public ITaskExecution Create(string taskName, DateTime dateTime, object parameter=null) {
-            var task = _taskRegistry.Tasks.FirstOrDefault(x => x.Name == taskName);
+            var task = _taskRegistry.Tasks.FirstOrDefault(x => x.Key == taskName);
 
-            if (task != null) {
-                return new TaskExecution(task, dateTime);
+            if (task.Key != null) {
+                return new TaskExecution((ITask)Activator.CreateInstance(task.Value), dateTime, parameter);
             }
 
             return null;
-        }
-
-        public IEnumerable<ITask> GetAll() {
-            return _taskRegistry.Tasks;
         }
     }
 }

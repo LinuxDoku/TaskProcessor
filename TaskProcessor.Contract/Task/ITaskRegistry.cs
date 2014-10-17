@@ -1,15 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace TaskProcessor.Contract.Task {
     public interface ITaskRegistry {
         /// <summary>
         /// List of all registered tasks.
         /// </summary>
-        IEnumerable<ITask> Tasks { get; }
+        IDictionary<string, Type> Tasks { get; }
 
         void Register(string typeName);
         void Register(ITask task);
+        void Register(Type taskType);
         void Delete(string taskName);
         void Delete(ITask task);
+        void Delete(Type taskType);
     }
 }

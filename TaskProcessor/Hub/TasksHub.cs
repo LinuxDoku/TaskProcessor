@@ -18,7 +18,8 @@ namespace TaskProcessor.Hub {
         /// </summary>
         /// <returns></returns>
         public IEnumerable<ITask> GetTasks() {
-            return _taskManager.GetAll();
+            //return _taskManager.GetAll();
+            return null;
         }
 
         public void Schedule(ITaskExecution taskExecution) {

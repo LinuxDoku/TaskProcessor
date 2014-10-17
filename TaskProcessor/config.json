@@ -8,13 +8,13 @@
     "tasks": [
         {
             "assembly": "TaskProcessor",
-            "class": "TaskProcessor.Tasks.MessageTask",
+            "class": "TaskProcessor.Task.MessageTask",
             "arguments": [
                 "Hello World"
             ]
         },
         {
-            "class": "TaskProcessor.Tasks.MessageTask",
+            "class": "TaskProcessor.Task.MessageTask",
             "arguments": [
                 "This is a test task execution"
             ]
