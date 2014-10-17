@@ -70,7 +70,7 @@ namespace TaskProcessor.Queue {
             while (true) {
                 var task = GetNextTask();
                 if (task != null) {
-                    var worker = _workers.FirstOrDefault(x => x.GetStatus() == WorkerStatus.WAITING);
+                    var worker = _workers.FirstOrDefault(x => x.Status == WorkerStatus.WAITING);
                     if (worker != null) {
                         task.Status = TaskStatus.WAITING;
                         worker.Execute(task);
