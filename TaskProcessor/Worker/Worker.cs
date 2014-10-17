@@ -14,8 +14,10 @@ namespace TaskProcessor.Worker {
         private bool _canceled = false;
         private WorkerStatus _status = WorkerStatus.WAITING;
 
-        public WorkerStatus GetStatus() {
-            return _status;
+        public WorkerStatus Status {
+            get {
+                return _status;
+            }
         }
 
         public void Execute(ITaskExecution taskExecution) {
@@ -39,7 +41,9 @@ namespace TaskProcessor.Worker {
         /// Start the worker.
         /// </summary>
         public void Start() {
-            throw new NotImplementedException();
+            if (_thread.ThreadState == ThreadState.Aborted) {
+                _thread.Start();
+            }
         }
 
         /// <summary>

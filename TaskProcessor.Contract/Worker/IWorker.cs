@@ -7,7 +7,10 @@ namespace TaskProcessor.Contract.Worker
 	/// </summary>
 	public interface IWorker
 	{
-        WorkerStatus GetStatus();
+        /// <summary>
+        /// Current worker status.
+        /// </summary>
+        WorkerStatus Status { get; }
 
         /// <summary>
         /// Execute a Task.
