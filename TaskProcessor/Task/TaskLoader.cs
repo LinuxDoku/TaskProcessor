@@ -5,11 +5,11 @@ using TaskProcessor.Contract.Task;
 
 namespace TaskProcessor.Task {
     class TaskLoader {
-        public ITask LoadTask(string assembly, string className) {
+        public ITask<ITaskConfiguration> LoadTask(string assembly, string className) {
             return null;
         }
 
-        public ITask LoadTask(string className) {
+        public ITask<ITaskConfiguration> LoadTask(string className) {
             return LoadTask(null, className);
         }
 

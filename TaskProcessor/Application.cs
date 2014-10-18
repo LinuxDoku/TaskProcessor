@@ -71,8 +71,11 @@ namespace TaskProcessor {
 
             // register tasks
             foreach (var task in _configuration.Tasks) {
-                _taskManager.Register(task);
-                queue.Add(new TaskExecution(task));
+                _taskManager.Register(task.Key);
+
+                foreach (var configuration in task.Value) {
+                    queue.Add(_taskManager.Create(task.Key, configuration));
+                }
             }
         }
 

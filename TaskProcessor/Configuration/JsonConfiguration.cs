@@ -9,7 +9,7 @@ using TaskProcessor.DI.Attributes;
 namespace TaskProcessor.Configuration {
     [Export(typeof(IConfiguration))]
     public class JsonConfiguration : IConfiguration {
-        private IList<ITask> _tasks;
+        private IDictionary<string, IList<ITaskConfiguration>> _tasks;
         private readonly ITaskManager _taskManager;
 
         [Import]
@@ -35,15 +35,14 @@ namespace TaskProcessor.Configuration {
                 }
 
                 // tasks
-                _tasks = new List<ITask>();
+                _tasks = new Dictionary<string, IList<ITaskConfiguration>>();
                 if (tasks != null && tasks.HasValues) {
                     foreach (var taskConfig in tasks) {
                         // TODO: move this higher logic to TaskLoader
-                        ITask task = null;
 
                         var assemblyName = (string)taskConfig.SelectToken("assembly");
                         var className = (string)taskConfig.SelectToken("class");
-                        var argumentList = taskConfig.SelectToken("arguments");
+                        var taskConfiguration = taskConfig.SelectToken("configuration");
 
                         var typeName = className;
                         if (assemblyName != null) {
@@ -52,23 +51,16 @@ namespace TaskProcessor.Configuration {
 
                         var type = Type.GetType(typeName);
                         if (type != null) {
-                            var constructor = type.GetConstructors()
-                                .FirstOrDefault(x => x.GetParameters().Length == argumentList.Count());
+                            var configurationTypeName = type.GetInterface(typeof(ITask<ITaskConfiguration>).Name).GetGenericArguments().FirstOrDefault().FullName;
+                            var configurationType = Type.GetType(configurationTypeName);
+                            var configuration = (ITaskConfiguration)taskConfiguration.ToObject(configurationType);
 
-                            if (constructor != null) {
-                                var args =
-                                    constructor.GetParameters()
-                                        .Select((t, i) => argumentList[i].ToObject(t.ParameterType));
-
-                                try {
-                                    task = (ITask) Activator.CreateInstance(type, args.ToArray());
-                                }
-                                catch (Exception) {
-                                }
-
-                                if (task != null) {
-                                    _tasks.Add(task);
-                                }
+                            if (_tasks.ContainsKey(type.FullName)) {
+                                _tasks[type.FullName].Add(configuration);
+                            } else {
+                                var list = new List<ITaskConfiguration>();
+                                list.Add(configuration);
+                                _tasks.Add(type.FullName, list);
                             }
                         }
                         else {
@@ -89,7 +81,7 @@ namespace TaskProcessor.Configuration {
         }
 
         public int Workers { get; private set; }
-        public IEnumerable<ITask> Tasks { get { return _tasks; } }
+        public IDictionary<string, IList<ITaskConfiguration>> Tasks { get { return _tasks; } }
         public bool UseHttps { get; private set; }
         public string Hostname { get; private set; }
         public short Port { get; private set; }

@@ -1,26 +1,16 @@
 ﻿using System;
 using System.Linq;
-using System.Threading;
 using TaskProcessor.Contract.Queue;
 using TaskProcessor.Contract.Task;
 using TaskProcessor.DI;
 using TaskProcessor.DI.Attributes;
 
-namespace TaskProcessor.Task {
+namespace TaskProcessor.Task.Message {
     /// <summary>
     /// A simple task which prints a message to stdout.
     /// </summary>
-    [Export(typeof(ITask))]
-    public class MessageTask : ITask {
-        public MessageTask(string message) {
-            Message = message;
-        }
-
-        /// <summary>
-        /// The message to print.
-        /// </summary>
-        /// <value>The message.</value>
-        private string Message { get; set; }
+    [Export(typeof(ITask<ITaskConfiguration>))]
+    public class MessageTask : ITask<MessageTaskConfiguration> {
 
         #region ITask implementation
 
@@ -30,23 +20,33 @@ namespace TaskProcessor.Task {
         /// <value>The name.</value>
         public string Name {
             get {
-                return "MessageTask";
+                return "TaskProcessor.Task.Message.MessageTask";
             }
+        }
+
+        public void Execute(ITaskConfiguration configuration) {
+            Execute((MessageTaskConfiguration)configuration);
         }
 
         /// <summary>
         /// Execute this task.
         /// </summary>
         public void Execute() {
-            Console.WriteLine(Message);
+            Console.WriteLine("");
 
             var queueManager = Container.GetExport<IQueueManager>();
             var taskManager = Container.GetExport<ITaskManager>();
             var queue = queueManager.Queues.FirstOrDefault();
 
             if (queue != null) {
-                queue.Add(taskManager.Create("MessageTask", DateTime.Now.AddSeconds(30), DateTime.Now.ToString()));
+                queue.Add(taskManager.Create("MessageTask", DateTime.Now.AddSeconds(30), new MessageTaskConfiguration() {
+                    Message = DateTime.Now.ToString()
+                }));
             }
+        }
+
+        public void Execute(MessageTaskConfiguration configuration) {
+            Console.WriteLine(configuration.Message);
         }
 
         #endregion

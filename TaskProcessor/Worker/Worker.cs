@@ -25,7 +25,7 @@ namespace TaskProcessor.Worker {
                 _status = WorkerStatus.WORKING;
                 taskExecution.Status = TaskStatus.RUNNING;
                 try {
-                    taskExecution.Task.Execute();
+                    taskExecution.Task.Execute(taskExecution.Configuration);
                     taskExecution.Status = TaskStatus.SUCCESSFUL;
                 } catch (Exception exception) {
                     taskExecution.Log(exception);

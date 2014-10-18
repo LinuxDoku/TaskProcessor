@@ -21,7 +21,7 @@ namespace TaskProcessor.Contract.Configuration
         /// Tasks to execute on this machine.
         /// </summary>
         /// <value>The tasks.</value>
-        IEnumerable<ITask> Tasks { get; }
+        IDictionary<string, IList<ITaskConfiguration>> Tasks { get; }
 
         /// <summary>
         /// Should the integrated communcation service use https?

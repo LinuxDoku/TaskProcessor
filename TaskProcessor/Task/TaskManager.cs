@@ -19,19 +19,19 @@ namespace TaskProcessor.Task {
             _taskRegistry.Register(typeName);
         }
 
-        public void Register(ITask task) {
+        public void Register(ITask<ITaskConfiguration> task) {
             _taskRegistry.Register(task);
         }
 
-        public ITaskExecution Create(string taskName, object parameter=null) {
-            return Create(taskName, DateTime.Now, parameter);
+        public ITaskExecution Create(string taskName, ITaskConfiguration configuration=null) {
+            return Create(taskName, DateTime.Now, configuration);
         }
 
-        public ITaskExecution Create(string taskName, DateTime dateTime, object parameter=null) {
+        public ITaskExecution Create(string taskName, DateTime dateTime, ITaskConfiguration configuration=null) {
             var task = _taskRegistry.Tasks.FirstOrDefault(x => x.Key == taskName);
 
             if (task.Key != null) {
-                return new TaskExecution((ITask)Activator.CreateInstance(task.Value), dateTime, parameter);
+                return new TaskExecution((ITask)Activator.CreateInstance(task.Value), dateTime, configuration);
             }
 
             return null;

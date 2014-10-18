@@ -8,16 +8,16 @@
     "tasks": [
         {
             "assembly": "TaskProcessor",
-            "class": "TaskProcessor.Task.MessageTask",
-            "arguments": [
-                "Hello World"
-            ]
+            "class": "TaskProcessor.Task.Message.MessageTask",
+            "configuration": {
+                "Message": "Hello World"
+            }
         },
         {
-            "class": "TaskProcessor.Task.MessageTask",
-            "arguments": [
-                "This is a test task execution"
-            ]
+            "class": "TaskProcessor.Task.Message.MessageTask",
+            "configuration": {
+                "Message": "Hello World"
+            }
         }
     ]
 }

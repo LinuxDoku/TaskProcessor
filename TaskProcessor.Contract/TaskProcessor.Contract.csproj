@@ -36,6 +36,7 @@
     <Compile Include="Queue\IQueueManager.cs" />
     <Compile Include="Queue\ITaskQueue.cs" />
     <Compile Include="Task\ITask.cs" />
+    <Compile Include="Task\ITaskConfiguration.cs" />
     <Compile Include="Task\ITaskExecution.cs" />
     <Compile Include="Task\ITaskManager.cs" />
     <Compile Include="Task\ITaskRegistry.cs" />

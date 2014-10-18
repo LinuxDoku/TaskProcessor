@@ -17,7 +17,7 @@ namespace TaskProcessor.Hub {
         /// Get all tasks.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<ITask> GetTasks() {
+        public IEnumerable<ITask<ITaskConfiguration>> GetTasks() {
             //return _taskManager.GetAll();
             return null;
         }

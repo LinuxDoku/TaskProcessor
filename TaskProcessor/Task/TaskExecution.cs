@@ -13,15 +13,15 @@ namespace TaskProcessor.Task {
 
         public TaskExecution(ITask task) : this(task, DateTime.Now) { }
 
-        public TaskExecution(ITask task, object parameters = null) : this(task, DateTime.Now, parameters) { }
+        public TaskExecution(ITask task, ITaskConfiguration configuration = null) : this(task, DateTime.Now, configuration) { }
 
-        public TaskExecution(ITask task, DateTime startTime, object parameters=null) {
+        public TaskExecution(ITask task, DateTime startTime, ITaskConfiguration configuration = null) {
             _task = task;
             _logs = new List<ILog>();
 
             TaskExecutionId = Guid.NewGuid();
             StartTime = startTime;
-            Parameters = parameters;
+            Configuration = configuration;
             Status = TaskStatus.INITIAL;
         }
 
@@ -33,7 +33,7 @@ namespace TaskProcessor.Task {
             get { return _task; }
         }
 
-        public object Parameters { get; private set; }
+        public ITaskConfiguration Configuration { get; private set; }
 
         public DateTime StartTime { get; set; }
 

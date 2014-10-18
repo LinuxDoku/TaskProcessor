@@ -20,7 +20,7 @@ namespace TaskProcessor.Contract.Task {
         /// <summary>
         /// Task parameters.
         /// </summary>
-        object Parameters { get; }
+        ITaskConfiguration Configuration { get; }
 
         /// <summary>
         /// The current task execution status.

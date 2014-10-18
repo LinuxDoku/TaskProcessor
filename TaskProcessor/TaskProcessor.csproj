@@ -96,7 +96,8 @@
     <Compile Include="Signalr\SignalrDependencyResolver.cs" />
     <Compile Include="OwinStartup.cs" />
     <Compile Include="Configuration\JsonConfiguration.cs" />
-    <Compile Include="Task\MessageTask.cs" />
+    <Compile Include="Task\Message\MessageTask.cs" />
+    <Compile Include="Task\Message\MessageTaskConfiguration.cs" />
     <Compile Include="Task\TaskExecution.cs" />
     <Compile Include="Task\TaskLoader.cs" />
     <Compile Include="Task\TaskManager.cs" />
