@@ -10,7 +10,7 @@ namespace TaskProcessor.Contract.Task {
 
         void Register(string typeName);
         void Register(ITask task);
-        void Register(Type taskType);
+        void Register(Type type);
         void Delete(string taskName);
         void Delete(ITask task);
         void Delete(Type taskType);

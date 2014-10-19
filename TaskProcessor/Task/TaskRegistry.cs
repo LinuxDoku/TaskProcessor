@@ -22,15 +22,12 @@ namespace TaskProcessor.Task {
         }
 
         public void Register(ITask task) {
-            if(_tasks.All(x => x.Key != task.Name)) {
-                _tasks.Add(task.Name, task.GetType());
-            }
+            Register(task.GetType());
         }
 
-        public void Register(Type taskType) {
-            if (taskType != null) {
-                var task = (ITask)Activator.CreateInstance(taskType);
-                Register(task);
+        public void Register(Type type) {
+            if (type != null && !_tasks.ContainsKey(type.FullName)) {
+                _tasks.Add(type.FullName, type);
             }
         }
 
@@ -42,12 +39,12 @@ namespace TaskProcessor.Task {
 
         public void Delete(ITask task) {
             if (task != null) {
-                _tasks.Remove(_tasks.FirstOrDefault());
+                Delete(task.GetType());
             }
         }
 
         public void Delete(Type taskType) {
-            var task = _tasks.FirstOrDefault(x => x.Value.Name == taskType.Name);
+            var task = _tasks.FirstOrDefault(x => x.Key == taskType.FullName);
             if (string.IsNullOrEmpty(task.Key)) {
                 _tasks.Remove(task);
             }
