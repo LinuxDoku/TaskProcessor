@@ -2,7 +2,6 @@
 using System.Linq;
 using NUnit.Framework;
 using TaskProcessor.Configuration;
-using TaskProcessor.Contract.Task;
 
 namespace TaskProcessor.Tests {
     /// <summary>
@@ -13,10 +12,8 @@ namespace TaskProcessor.Tests {
 
         [Test]
         public void JsonConfigurationEmptyTest() {
-            var taskManagerMock = new Moq.Mock<ITaskManager>();
-
             var configurationString = "{}";
-            var config = new JsonConfiguration(taskManagerMock.Object);
+            var config = new JsonConfiguration();
             config.Parse(configurationString);
 
             Assert.NotNull(config);
@@ -26,10 +23,8 @@ namespace TaskProcessor.Tests {
 
         [Test]
         public void JsonConfigurationMissingTasksTest() {
-            var taskManagerMock = new Moq.Mock<ITaskManager>();
-
             var configurationString = "{\"workers\": 2}";
-            var config = new JsonConfiguration(taskManagerMock.Object);
+            var config = new JsonConfiguration();
             config.Parse(configurationString);
 
             Assert.NotNull(config);
@@ -40,12 +35,10 @@ namespace TaskProcessor.Tests {
         [Test]
         public void JsonConfigurationInvalidJsonTest()
         {
-            var taskManagerMock = new Moq.Mock<ITaskManager>();
-
             var configurationString = "{\"workers: 2}";
 
             try {
-                var config = new JsonConfiguration(taskManagerMock.Object);
+                var config = new JsonConfiguration();
                 config.Parse(configurationString);
             } catch (Exception ex) {
                 Assert.True(ex.Message.ToLower().Contains("invalid configuration"));
