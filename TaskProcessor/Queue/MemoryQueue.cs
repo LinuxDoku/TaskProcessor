@@ -32,7 +32,7 @@ namespace TaskProcessor.Queue {
         /// </summary>
         /// <param name="task"></param>
         public void Add(ITaskExecution task) {
-            task.Status = TaskStatus.QUEUED;
+            task.Status = TaskStatus.Queued;
             _tasks.Add(task);
         }
 
@@ -70,9 +70,9 @@ namespace TaskProcessor.Queue {
             while (true) {
                 var task = GetNextTask();
                 if (task != null) {
-                    var worker = _workers.FirstOrDefault(x => x.Status == WorkerStatus.WAITING);
+                    var worker = _workers.FirstOrDefault(x => x.Status == WorkerStatus.Waiting);
                     if (worker != null) {
-                        task.Status = TaskStatus.WAITING;
+                        task.Status = TaskStatus.Waiting;
                         worker.Execute(task);
                     } else {
                         Thread.Sleep(500);
@@ -85,7 +85,7 @@ namespace TaskProcessor.Queue {
 
         private ITaskExecution GetNextTask() {
             return _tasks.FirstOrDefault(
-                x => x.Status == TaskStatus.QUEUED && (x.StartTime == default(DateTime) || (x.StartTime <= DateTime.Now))
+                x => x.Status == TaskStatus.Queued && (x.StartTime == default(DateTime) || (x.StartTime <= DateTime.Now))
             );
         }
     }

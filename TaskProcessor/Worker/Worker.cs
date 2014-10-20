@@ -11,8 +11,7 @@ namespace TaskProcessor.Worker {
     [Export(typeof(IWorker))]
     public class Worker : IWorker {
         private Thread _thread;
-        private bool _canceled = false;
-        private WorkerStatus _status = WorkerStatus.WAITING;
+        private WorkerStatus _status = WorkerStatus.Waiting;
 
         public WorkerStatus Status {
             get {
@@ -22,20 +21,21 @@ namespace TaskProcessor.Worker {
 
         public void Execute(ITaskExecution taskExecution) {
             _thread = new Thread(() => {
-                _status = WorkerStatus.WORKING;
-                taskExecution.Status = TaskStatus.RUNNING;
+                _status = WorkerStatus.Working;
+                taskExecution.Status = TaskStatus.Running;
+
                 try {
                     taskExecution.Task.Execute(taskExecution.Configuration);
-                    taskExecution.Status = TaskStatus.SUCCESSFUL;
+                    taskExecution.Status = TaskStatus.Successful;
                 } catch (Exception exception) {
                     taskExecution.Log(exception);
-                    taskExecution.Status = TaskStatus.FAILED;
+                    taskExecution.Status = TaskStatus.Failed;
                 }
-                _status = WorkerStatus.WAITING;
+                
+                _status = WorkerStatus.Waiting;
             });
             _thread.Start();
         }
-
 
         /// <summary>
         /// Start the worker.
@@ -51,20 +51,29 @@ namespace TaskProcessor.Worker {
         /// </summary>
         public void Stop() {
             _thread.Abort();
+            _status = WorkerStatus.Stopped;
         }
 
         /// <summary>
         /// Cancels the worker execution when it's work is done.
         /// </summary>
         public void Cancel() {
-            _canceled = true;
+            if (_status == WorkerStatus.Working) {
+                _status = WorkerStatus.Canceled;
+            }
         }
 
         /// <summary>
         /// Abort a prior worker cancel.
         /// </summary>
         public void AbortCancel() {
-            _canceled = false;
+            if (_status == WorkerStatus.Canceled) {
+                if (_thread.ThreadState == ThreadState.Running) {
+                    _status = WorkerStatus.Working;
+                } else {
+                    _status = WorkerStatus.Waiting;
+                }
+            }
         }
     }
 }

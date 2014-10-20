@@ -22,7 +22,7 @@ namespace TaskProcessor.Task {
             TaskExecutionId = Guid.NewGuid();
             StartTime = startTime;
             Configuration = configuration;
-            Status = TaskStatus.INITIAL;
+            Status = TaskStatus.Initial;
         }
 
         #region ITaskExecution implementation

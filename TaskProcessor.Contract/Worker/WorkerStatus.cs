@@ -2,10 +2,10 @@
 {
     public enum WorkerStatus
     {
-        WAITING,
-        WORKING,
-        CANCELED,
-        PAUSED,
-        STOPPED
+        Waiting,
+        Working,
+        Canceled,
+        Paused,
+        Stopped
     }
 }
