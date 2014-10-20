@@ -10,12 +10,6 @@ namespace TaskProcessor.Configuration {
     [Export(typeof(IConfiguration))]
     public class JsonConfiguration : IConfiguration {
         private IDictionary<string, IList<ITaskConfiguration>> _tasks;
-        private readonly ITaskManager _taskManager;
-
-        [Import]
-        public JsonConfiguration(ITaskManager taskManager) {
-            _taskManager = taskManager;
-        }
 
         public void Parse(string jsonString) {
             JObject source = null;
@@ -58,8 +52,7 @@ namespace TaskProcessor.Configuration {
                             if (_tasks.ContainsKey(type.FullName)) {
                                 _tasks[type.FullName].Add(configuration);
                             } else {
-                                var list = new List<ITaskConfiguration>();
-                                list.Add(configuration);
+                                var list = new List<ITaskConfiguration> { configuration };
                                 _tasks.Add(type.FullName, list);
                             }
                         }
@@ -74,8 +67,8 @@ namespace TaskProcessor.Configuration {
 
                 if (communication != null && communication.HasValues) {
                     UseHttps = (bool)communication.SelectToken("useHttps");
-                    Hostname = (string) communication.SelectToken("hostname");
-                    Port = (short) communication.SelectToken("port");
+                    Hostname = (string)communication.SelectToken("hostname");
+                    Port = (short)communication.SelectToken("port");
                 }
             }
         }

@@ -20,7 +20,7 @@ namespace TaskProcessor.Task.Message {
         /// <value>The name.</value>
         public string Name {
             get {
-                return "TaskProcessor.Task.Message.MessageTask";
+                return "MessageTask";
             }
         }
 

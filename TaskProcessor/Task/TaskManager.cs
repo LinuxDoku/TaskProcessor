@@ -19,7 +19,7 @@ namespace TaskProcessor.Task {
             _taskRegistry.Register(typeName);
         }
 
-        public void Register(ITask<ITaskConfiguration> task) {
+        public void Register(ITask task) {
             _taskRegistry.Register(task);
         }
 
