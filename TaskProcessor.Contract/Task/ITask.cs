@@ -15,7 +15,7 @@
         /// A tasks unique identifier.
 		/// </summary>
 		/// <value>The name.</value>
-		new string Name { get; }
+		string Name { get; }
 
 		/// <summary>
 		/// Execute this task.

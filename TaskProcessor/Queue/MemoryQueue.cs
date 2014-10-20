@@ -13,7 +13,6 @@ namespace TaskProcessor.Queue {
     /// </summary>
     [Export(typeof(ITaskQueue))]
     public class MemoryQueue : ITaskQueue {
-        private readonly Thread _thread;
         private readonly IList<IWorker> _workers;
         private readonly List<ITaskExecution> _tasks;
 
@@ -21,8 +20,7 @@ namespace TaskProcessor.Queue {
             _workers = new List<IWorker>();
             _tasks = new List<ITaskExecution>();
 
-            _thread = new Thread(Process);
-            _thread.Start();
+            new Thread(Process).Start();
         }
 
         public string Name { get; set; }
