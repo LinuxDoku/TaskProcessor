@@ -11,7 +11,7 @@ namespace TaskProcessor.Service {
 
         static void Main(string[] args) {
             if (args.Any()) {
-                if (args.First() == "install" && ServiceController.GetServices().All(x => x.ServiceName != ServiceName)) {
+                if (args.First() == "install") {
                     ManagedInstallerClass.InstallHelper(new[] {"/i", Assembly.GetExecutingAssembly().Location});
                 }
 
