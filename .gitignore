@@ -13,3 +13,5 @@ Release/
 
 # Xamarin Studio
 .userprefs
+/TaskProcessor.sln.ide
+*.suo

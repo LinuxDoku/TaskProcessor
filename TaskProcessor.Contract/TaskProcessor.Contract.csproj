@@ -42,6 +42,7 @@
     <Compile Include="Task\ITaskRegistry.cs" />
     <Compile Include="Task\TaskStatus.cs" />
     <Compile Include="Worker\IWorker.cs" />
+    <Compile Include="Worker\IWorkerManager.cs" />
     <Compile Include="Worker\WorkerStatus.cs" />
   </ItemGroup>
   <ItemGroup>

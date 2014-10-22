@@ -11,6 +11,7 @@ using TaskProcessor.DI.Attributes;
 using TaskProcessor.Task;
 using TaskProcessor.Worker;
 using System.Threading;
+using TaskProcessor.Contract.Worker;
 
 namespace TaskProcessor {
     [Export(typeof(IApplication))]

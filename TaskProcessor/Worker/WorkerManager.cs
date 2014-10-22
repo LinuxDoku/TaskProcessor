@@ -16,8 +16,4 @@ namespace TaskProcessor.Worker {
             return workers;
         }
     }
-
-    public interface IWorkerManager {
-        IEnumerable<IWorker> Spawn(int numerOfWorkers);
-    }
 }
