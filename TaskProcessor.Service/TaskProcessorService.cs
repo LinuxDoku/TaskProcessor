@@ -14,12 +14,11 @@ namespace TaskProcessor.Service {
         /// <param name="args"></param>
         static void Main(string[] args) {
             if (args.Any() && args.First() != "") {
-                if (args.First() == "install") {
+                if (args.First() == "install" && ServiceController.GetServices().All(x => x.ServiceName != TaskProcessorServiceName)) {
                     ManagedInstallerClass.InstallHelper(new[] { "/i", Assembly.GetExecutingAssembly().Location });
                 }
 
-                if (args.First() == "uninstall" &&
-                    ServiceController.GetServices().Any(x => x.ServiceName == TaskProcessorServiceName)) {
+                if (args.First() == "uninstall" &&  ServiceController.GetServices().Any(x => x.ServiceName == TaskProcessorServiceName)) {
                     ManagedInstallerClass.InstallHelper(new[] { "/u", Assembly.GetExecutingAssembly().Location });
                 }
             } else {
@@ -49,8 +48,10 @@ namespace TaskProcessor.Service {
         }
 
         private void RunApplication() {
+            EventLog.WriteEntry("RunApplication");
             DI.Container.RegisterAssembly(Assembly.GetAssembly(typeof(IApplication)));
             DI.Container.GetExport<IApplication>();
+            EventLog.WriteEntry("RunApplication End");
         }
     }
 }
