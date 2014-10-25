@@ -13,7 +13,7 @@ namespace TaskProcessor.Service {
             serviceProcessInstaller.Account = ServiceAccount.LocalSystem;
 
             var serviceInstaller = new ServiceInstaller();
-            serviceInstaller.ServiceName = TaskProcessorService.ServiceName;
+            serviceInstaller.ServiceName = TaskProcessorService.TaskProcessorServiceName;
 
             Installers.Add(serviceProcessInstaller);
             Installers.Add(serviceInstaller);
