@@ -42,6 +42,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommunicationClient.cs" />
     <Compile Include="ConfigurationTest.cs" />
     <Compile Include="LogTest.cs" />
     <Compile Include="TaskManagerTest.cs" />
@@ -53,6 +54,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TaskProcessor.Communication.Contract\TaskProcessor.Communication.Contract.csproj">
+      <Project>{1b535892-8c1a-4dd1-98af-c8bb13d36580}</Project>
+      <Name>TaskProcessor.Communication.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TaskProcessor.Communication\TaskProcessor.Communication.csproj">
+      <Project>{31911709-65ff-4f09-b6bf-7df527f4f06b}</Project>
+      <Name>TaskProcessor.Communication</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TaskProcessor.Contract\TaskProcessor.Contract.csproj">
       <Project>{C8E09E16-A774-4527-B023-A060B87B905C}</Project>
       <Name>TaskProcessor.Contract</Name>
