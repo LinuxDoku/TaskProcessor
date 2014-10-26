@@ -20,7 +20,7 @@ namespace TaskProcessor.DI {
         private TypeOfExport _defaultTypeOfExport;
 
         private Container() {
-            _defaultTypeOfExport = x => x.GetCustomAttributes(typeof (Export), true).OfType<Export>().First().Type ?? x;
+            _defaultTypeOfExport = x => x.GetCustomAttributes(typeof (ExportAttribute), true).OfType<ExportAttribute>().First().Type ?? x;
 
             var containerBuilder = new ContainerBuilder();
 
@@ -88,18 +88,18 @@ namespace TaskProcessor.DI {
 
         private void RegisterAssembly(ContainerBuilder builder, Assembly assembly) {
             var types = assembly.GetTypes()
-                                .Where(x => x.GetCustomAttributes(typeof (Export), true).Any())
+                                .Where(x => x.GetCustomAttributes(typeof (ExportAttribute), true).Any())
                                 .ToArray();
 
             builder.RegisterTypes(types)
-                .Where(x => x.GetCustomAttributes(typeof (Shared), true).Any())
+                .Where(x => x.GetCustomAttributes(typeof (SharedAttribute), true).Any())
                 .As(x => _defaultTypeOfExport(x))
                 .SingleInstance();
 
             builder.RegisterTypes(types)
                 .Where(
-                    x => !x.GetCustomAttributes(typeof (Shared), true).Any() ||
-                          x.GetCustomAttributes(typeof (NonShared), true).Any())
+                    x => !x.GetCustomAttributes(typeof (SharedAttribute), true).Any() ||
+                          x.GetCustomAttributes(typeof (NonSharedAttribute), true).Any())
                 .As(x => _defaultTypeOfExport(x))
                 .InstancePerDependency();
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
+using TaskProcessor.Communication;
 using TaskProcessor.Communication.Contract;
 
 namespace TaskProcessor.Tests {
@@ -27,6 +28,14 @@ namespace TaskProcessor.Tests {
         public void CommunicationClientInvokeTest() {
             var service = new TestService();
             var client = new TestClient(service);
+
+            Assert.AreEqual("Hello World", client.Invoke(x => x.HelloWorld()));
+        }
+
+        [Test]
+        public void CommunicationClientBaseInvokeTest() {
+            var service = new TestService();
+            var client = new Client<TestService>(service);
 
             Assert.AreEqual("Hello World", client.Invoke(x => x.HelloWorld()));
         }

@@ -44,10 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\Export.cs" />
-    <Compile Include="Attributes\Import.cs" />
-    <Compile Include="Attributes\NonShared.cs" />
-    <Compile Include="Attributes\Shared.cs" />
+    <Compile Include="Attributes\ExportAttribute.cs" />
+    <Compile Include="Attributes\ImportAttribute.cs" />
+    <Compile Include="Attributes\NonSharedAttribute.cs" />
+    <Compile Include="Attributes\SharedAttribute.cs" />
     <Compile Include="Container.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
