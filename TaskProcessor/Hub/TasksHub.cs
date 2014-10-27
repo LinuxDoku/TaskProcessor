@@ -5,7 +5,7 @@ using TaskProcessor.DI.Attributes;
 
 namespace TaskProcessor.Hub {
     [Export(typeof (TasksHub))]
-    public class TasksHub : Microsoft.AspNet.SignalR.Hub, ITasksHub {
+    public class TasksHub :  ITasksHub {
         private readonly ITaskManager _taskManager;
 
         [Import]

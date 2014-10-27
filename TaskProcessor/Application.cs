@@ -4,12 +4,12 @@ using System.Net.Sockets;
 using System.Reflection;
 using System.Text;
 using Microsoft.Owin.Hosting;
+using TaskProcessor.Communication;
+using TaskProcessor.Communication.Contract;
 using TaskProcessor.Contract.Configuration;
 using TaskProcessor.Contract.Queue;
 using TaskProcessor.Contract.Task;
 using TaskProcessor.DI.Attributes;
-using TaskProcessor.Task;
-using TaskProcessor.Worker;
 using System.Threading;
 using TaskProcessor.Contract.Worker;
 
@@ -24,13 +24,15 @@ namespace TaskProcessor {
 
         private readonly Thread _queueThread;
         private readonly Thread _signalrThread;
+        private readonly IServer _server;
 
         [Import]
-        public Application(IQueueManager queueManager, IWorkerManager workerManager, ITaskManager taskManager, IConfiguration configuration) {
+        public Application(IQueueManager queueManager, IWorkerManager workerManager, ITaskManager taskManager, IConfiguration configuration, IServer server) {
             _queueManager = queueManager;
             _workerManager = workerManager;
             _taskManager = taskManager;
             _configuration = configuration;
+            _server = server;
 
             if (ParseConfig()) {
                 _queueThread = new Thread(StartQueue);
@@ -90,8 +92,8 @@ namespace TaskProcessor {
                        .Append(_configuration.Port);
 
             try {
-                using (WebApp.Start<OwinStartup>(hostBuilder.ToString())) {
-                    Console.WriteLine("Server is running");
+                using (WebApp.Start(hostBuilder.ToString(), _server.Start)) {
+                    Console.WriteLine("Server is started");
                     Console.ReadLine();
                 }
             } catch (TargetInvocationException exception) {
@@ -101,6 +103,12 @@ namespace TaskProcessor {
                     Console.WriteLine("Someting went wrong! " + exception.InnerException.Message);
                 }
             }
+        }
+
+        public static void InitializeContainer() {
+            DI.Container.RegisterAssembly(Assembly.GetAssembly(typeof(IServer)));
+            DI.Container.RegisterAssembly(Assembly.GetAssembly(typeof(Server)));
+            DI.Container.RegisterAssembly(Assembly.GetAssembly(typeof(Communication.Infrastructure.Server)));
         }
     }
 }

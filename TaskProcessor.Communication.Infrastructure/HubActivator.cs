@@ -2,7 +2,7 @@
 using TaskProcessor.DI;
 using TaskProcessor.DI.Attributes;
 
-namespace TaskProcessor.Signalr {
+namespace TaskProcessor.Communication.Infrastructure {
     [Export(typeof(IHubActivator))]
     public class HubActivator : IHubActivator {
         public IHub Create(HubDescriptor descriptor) {

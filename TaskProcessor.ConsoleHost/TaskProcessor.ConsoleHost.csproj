@@ -52,6 +52,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TaskProcessor.Communication.Contract\TaskProcessor.Communication.Contract.csproj">
+      <Project>{1B535892-8C1A-4DD1-98AF-C8BB13D36580}</Project>
+      <Name>TaskProcessor.Communication.Contract</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TaskProcessor.Contract\TaskProcessor.Contract.csproj">
       <Project>{c8e09e16-a774-4527-b023-a060b87b905c}</Project>
       <Name>TaskProcessor.Contract</Name>

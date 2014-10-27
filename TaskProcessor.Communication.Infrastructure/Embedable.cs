@@ -1,4 +1,4 @@
-﻿namespace TaskProcessor
+﻿namespace TaskProcessor.Communication.Infrastructure
 {
     /// <summary>
     ///     Workaround for compiler optimization, which removes runtime loaded assemblies.

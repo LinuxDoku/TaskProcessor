@@ -1,7 +1,8 @@
 ﻿using System;
+using Owin;
 
 namespace TaskProcessor.Communication.Contract {
     public interface IServer {
-        void Start(Uri uri);
+        void Start(IAppBuilder owinAppBuilder);
     }
 }

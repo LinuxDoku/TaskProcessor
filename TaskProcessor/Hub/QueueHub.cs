@@ -6,7 +6,7 @@ using TaskProcessor.DI.Attributes;
 
 namespace TaskProcessor.Hub {
     [Export(typeof(QueueHub))]
-    public class QueueHub : Microsoft.AspNet.SignalR.Hub, IQueueHub {
+    public class QueueHub : IQueueHub {
         private readonly IQueueManager _queueManager;
 
         [Import]
