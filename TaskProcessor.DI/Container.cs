@@ -16,11 +16,25 @@ namespace TaskProcessor.DI {
         private static Container _instance = new Container();
         private readonly IContainer _container;
 
-        private delegate Type TypeOfExport(Type type);
+        private delegate Type[] TypeOfExport(Type type);
         private TypeOfExport _defaultTypeOfExport;
 
         private Container() {
-            _defaultTypeOfExport = x => x.GetCustomAttributes(typeof (ExportAttribute), true).OfType<ExportAttribute>().First().Type ?? x;
+            _defaultTypeOfExport = x => {
+                var types = new List<Type>();
+                var exports = x.GetCustomAttributes(typeof (ExportAttribute), true)
+                               .OfType<ExportAttribute>();
+
+                if (exports.Any()) {
+                    foreach (var export in exports) {
+                        types.Add(export.Type);
+                    }
+                } else {
+                    types.Add(x);
+                }
+
+                return types.ToArray();
+            };
 
             var containerBuilder = new ContainerBuilder();
 
