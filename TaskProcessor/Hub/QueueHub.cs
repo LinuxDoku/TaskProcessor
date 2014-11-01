@@ -6,6 +6,7 @@ using TaskProcessor.Contract.Queue;
 using TaskProcessor.DI.Attributes;
 
 namespace TaskProcessor.Hub {
+    [Export(typeof(QueueHub))]
     [Export(typeof(IQueueHub))]
     [Export(typeof(IService))]
     public class QueueHub : IQueueHub {
