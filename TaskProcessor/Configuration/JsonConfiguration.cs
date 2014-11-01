@@ -66,7 +66,7 @@ namespace TaskProcessor.Configuration {
                 var communication = source.SelectToken("communication");
 
                 if (communication != null && communication.HasValues) {
-                    UseHttps = (bool)communication.SelectToken("useHttps");
+                    Https = (bool)communication.SelectToken("https");
                     Hostname = (string)communication.SelectToken("hostname");
                     Port = (short)communication.SelectToken("port");
                 }
@@ -75,7 +75,7 @@ namespace TaskProcessor.Configuration {
 
         public int Workers { get; private set; }
         public IDictionary<string, IList<ITaskConfiguration>> Tasks { get { return _tasks; } }
-        public bool UseHttps { get; private set; }
+        public bool Https { get; private set; }
         public string Hostname { get; private set; }
         public short Port { get; private set; }
     }

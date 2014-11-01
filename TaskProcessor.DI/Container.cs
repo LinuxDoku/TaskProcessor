@@ -74,6 +74,12 @@ namespace TaskProcessor.DI {
             return null;
         }
 
+        public static void Register<T>(Type type) {
+            var containerBuilder = new ContainerBuilder();
+            containerBuilder.RegisterType(type).As<T>();
+            containerBuilder.Update(_instance._container);
+        }
+
         /// <summary>
         /// Register all types of the assembly which have an Export attribute.
         /// </summary>

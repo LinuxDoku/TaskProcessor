@@ -85,7 +85,7 @@ namespace TaskProcessor {
         private void StartSignalr() {
             // TODO: create own url builder
             var hostBuilder = new StringBuilder();
-            hostBuilder.Append(_configuration.UseHttps ? "https" : "http")
+            hostBuilder.Append(_configuration.Https ? "https" : "http")
                        .Append("://")
                        .Append(_configuration.Hostname)
                        .Append(":")

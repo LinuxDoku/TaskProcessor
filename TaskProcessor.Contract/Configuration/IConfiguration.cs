@@ -26,7 +26,7 @@ namespace TaskProcessor.Contract.Configuration
         /// <summary>
         /// Should the integrated communcation service use https?
         /// </summary>
-        bool UseHttps { get; }
+        bool Https { get; }
 
         /// <summary>
         /// Hostname for the integrated communication service.

@@ -1,6 +1,6 @@
 ﻿{
     "communication": {
-        "useHttps": false,
+        "https": false,
         "hostname": "localhost",
         "port": 8080
     },

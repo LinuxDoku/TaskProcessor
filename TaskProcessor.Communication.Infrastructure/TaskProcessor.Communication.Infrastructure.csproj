@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="Embedable.cs" />
     <Compile Include="HubActivator.cs" />
+    <Compile Include="HubDescriptorProvider.cs" />
     <Compile Include="OwinStartup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server.cs" />
