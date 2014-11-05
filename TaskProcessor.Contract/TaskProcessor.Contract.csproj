@@ -32,8 +32,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Configuration\IConfiguration.cs" />
-    <Compile Include="Hub\IQueueHub.cs" />
-    <Compile Include="Hub\ITasksHub.cs" />
+    <Compile Include="Service\IQueue.cs" />
+    <Compile Include="Service\ITasks.cs" />
     <Compile Include="ILog.cs" />
     <Compile Include="ILogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

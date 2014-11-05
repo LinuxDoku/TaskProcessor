@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using TaskProcessor.Communication.Contract;
-using TaskProcessor.Contract.Hub;
+using TaskProcessor.Contract.Service;
 using TaskProcessor.Contract.Task;
 using TaskProcessor.DI.Attributes;
 
 namespace TaskProcessor.Hub {
-    [Export(typeof(ITasksHub))]
+    [Export(typeof(ITasks))]
     [Export(typeof(IService))]
-    public class TasksHub :  ITasksHub {
+    public class TasksHub :  ITasks {
         private readonly ITaskManager _taskManager;
 
         [Import]

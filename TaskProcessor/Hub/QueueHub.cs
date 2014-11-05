@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using TaskProcessor.Communication.Contract;
-using TaskProcessor.Contract.Hub;
+using TaskProcessor.Contract.Service;
 using TaskProcessor.Contract.Queue;
 using TaskProcessor.DI.Attributes;
 
 namespace TaskProcessor.Hub {
     [Export(typeof(QueueHub))]
-    [Export(typeof(IQueueHub))]
+    [Export(typeof(IQueue))]
     [Export(typeof(IService))]
-    public class QueueHub : IQueueHub {
+    public class QueueHub : IQueue {
         private readonly IQueueManager _queueManager;
 
         [Import]
