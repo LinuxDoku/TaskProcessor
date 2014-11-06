@@ -1,4 +1,5 @@
-﻿using System.Configuration.Install;
+﻿using System;
+using System.Configuration.Install;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
@@ -14,6 +15,11 @@ namespace TaskProcessor.Service {
         /// <param name="args"></param>
         public static void Main(string[] args) {
             if (args.Any() && args.First() != "") {
+                if (args.First() == "run") {
+                    var service = new TaskProcessorService();
+                    service.RunApplication();
+                }
+
                 if (args.First() == "install" && ServiceController.GetServices().All(x => x.ServiceName != TaskProcessorServiceName)) {
                     ManagedInstallerClass.InstallHelper(new[] { "/i", Assembly.GetExecutingAssembly().Location });
                 }
@@ -49,6 +55,7 @@ namespace TaskProcessor.Service {
 
         private void RunApplication() {
             EventLog.WriteEntry("RunApplication");
+            DI.Container.RegisterAssembly(Assembly.GetAssembly(typeof(Application)));
             DI.Container.RegisterAssembly(Assembly.GetAssembly(typeof(IApplication)));
             var application = DI.Container.GetExport<IApplication>();
             application.Run();
