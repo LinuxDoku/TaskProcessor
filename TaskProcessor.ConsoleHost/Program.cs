@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using TaskProcessor.Contract;
 using TaskProcessor.DI;
 
 namespace TaskProcessor.ConsoleHost {

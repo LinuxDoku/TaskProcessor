@@ -6,6 +6,7 @@ using System.Text;
 using Microsoft.Owin.Hosting;
 using TaskProcessor.Communication;
 using TaskProcessor.Communication.Contract;
+using TaskProcessor.Contract;
 using TaskProcessor.Contract.Configuration;
 using TaskProcessor.Contract.Task;
 using TaskProcessor.DI.Attributes;

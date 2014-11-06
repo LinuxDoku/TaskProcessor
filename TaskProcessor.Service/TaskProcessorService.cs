@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.ServiceProcess;
 using System.Threading;
+using TaskProcessor.Contract;
 
 namespace TaskProcessor.Service {
     public partial class TaskProcessorService : ServiceBase {
