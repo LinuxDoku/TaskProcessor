@@ -1,5 +1,4 @@
-﻿using System;
-using System.Configuration.Install;
+﻿using System.Configuration.Install;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
@@ -12,7 +11,7 @@ namespace TaskProcessor.Service {
         /// Service entry point with integrated cli installer.
         /// </summary>
         /// <param name="args"></param>
-        static void Main(string[] args) {
+        public static void Main(string[] args) {
             if (args.Any() && args.First() != "") {
                 if (args.First() == "install" && ServiceController.GetServices().All(x => x.ServiceName != TaskProcessorServiceName)) {
                     ManagedInstallerClass.InstallHelper(new[] { "/i", Assembly.GetExecutingAssembly().Location });
@@ -50,7 +49,8 @@ namespace TaskProcessor.Service {
         private void RunApplication() {
             EventLog.WriteEntry("RunApplication");
             DI.Container.RegisterAssembly(Assembly.GetAssembly(typeof(IApplication)));
-            DI.Container.GetExport<IApplication>();
+            var application = DI.Container.GetExport<IApplication>();
+            application.Run();
             EventLog.WriteEntry("RunApplication End");
         }
     }

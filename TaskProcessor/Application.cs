@@ -21,19 +21,27 @@ namespace TaskProcessor {
         private readonly IWorkerManager _workerManager;
         private readonly IConfiguration _configuration;
         private readonly ITaskManager _taskManager;
-
-        private readonly Thread _queueThread;
-        private readonly Thread _signalrThread;
         private readonly IServer _server;
 
-        [Import]
-        public Application(IQueueManager queueManager, IWorkerManager workerManager, ITaskManager taskManager, IConfiguration configuration, IServer server) {
-            _queueManager = queueManager;
-            _workerManager = workerManager;
-            _taskManager = taskManager;
-            _configuration = configuration;
-            _server = server;
 
+        private Thread _queueThread;
+        private Thread _signalrThread;
+
+        [Import]
+        public Application() {
+            DI.Container.RegisterAssembly(Assembly.GetAssembly(typeof(IServer)));
+            DI.Container.RegisterAssembly(Assembly.GetAssembly(typeof(Server)));
+            DI.Container.RegisterAssembly(Assembly.GetAssembly(typeof(Communication.Infrastructure.Server)));
+
+            _queueManager = DI.Container.GetExport<IQueueManager>();
+            _workerManager = DI.Container.GetExport<IWorkerManager>();
+            _configuration = DI.Container.GetExport<IConfiguration>();
+            _taskManager = DI.Container.GetExport<ITaskManager>();
+            _server = DI.Container.GetExport<IServer>();
+        }
+
+
+        public void Run() {
             if (ParseConfig()) {
                 _queueThread = new Thread(StartQueue);
                 _signalrThread = new Thread(StartSignalr);
@@ -103,12 +111,6 @@ namespace TaskProcessor {
                     Console.WriteLine("Someting went wrong! " + exception.InnerException.Message);
                 }
             }
-        }
-
-        public static void InitializeContainer() {
-            DI.Container.RegisterAssembly(Assembly.GetAssembly(typeof(IServer)));
-            DI.Container.RegisterAssembly(Assembly.GetAssembly(typeof(Server)));
-            DI.Container.RegisterAssembly(Assembly.GetAssembly(typeof(Communication.Infrastructure.Server)));
         }
     }
 }
