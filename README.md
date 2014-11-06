@@ -17,7 +17,7 @@ xbuild
 ```
 
 ## Run
-On a linux box simply tun the console host:
+On a linux box simply run the console host:
 ```
 mono TaskProcessor.ConsoleHost/bin/Debug/TaskProcessor.ConsoleHost.exe
 ```
