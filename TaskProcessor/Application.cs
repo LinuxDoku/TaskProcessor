@@ -7,11 +7,11 @@ using Microsoft.Owin.Hosting;
 using TaskProcessor.Communication;
 using TaskProcessor.Communication.Contract;
 using TaskProcessor.Contract.Configuration;
-using TaskProcessor.Contract.Queue;
 using TaskProcessor.Contract.Task;
 using TaskProcessor.DI.Attributes;
 using System.Threading;
 using TaskProcessor.Contract.Worker;
+using TaskProcessor.Contract.Queue;
 
 namespace TaskProcessor {
     [Export(typeof(IApplication))]

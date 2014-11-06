@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Configuration\IConfiguration.cs" />
+    <Compile Include="IApplication.cs" />
     <Compile Include="Service\IQueue.cs" />
     <Compile Include="Service\ITasks.cs" />
     <Compile Include="ILog.cs" />
