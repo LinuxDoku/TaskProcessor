@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration.Install;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.ServiceProcess;
@@ -48,6 +49,9 @@ namespace TaskProcessor.Service {
         public static string TaskProcessorServiceName = "TaskProcessor";
 
         protected override void OnStart(string[] args) {
+#if DEBUG
+            Debugger.Launch();
+#endif
             var thread = new Thread(RunApplication);
             thread.IsBackground = false;
             thread.Start();

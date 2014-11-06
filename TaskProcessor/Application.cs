@@ -23,10 +23,11 @@ namespace TaskProcessor {
         private readonly IConfiguration _configuration;
         private readonly ITaskManager _taskManager;
         private readonly IServer _server;
+        private IDisposable _communicationServer;
 
 
         private Thread _queueThread;
-        private Thread _signalrThread;
+        private Thread _communicationThread;
 
         [Import]
         public Application() {
@@ -45,21 +46,25 @@ namespace TaskProcessor {
         public void Run() {
             if (ParseConfig()) {
                 _queueThread = new Thread(StartQueue);
-                _signalrThread = new Thread(StartSignalr);
+                _communicationThread = new Thread(StartCommunication);
 
                 _queueThread.Start();
-                _signalrThread.Start();
+                _communicationThread.Start();
             }
         }
 
         public void Dispose() {
+            if (_communicationServer != null) {
+                _communicationServer.Dispose();
+            }
+
             _queueThread.Abort();
-            _signalrThread.Abort();
+            _communicationThread.Abort();
         }
 
         private bool ParseConfig() {
             // try to read config
-            var configFile = "./config.json";
+            var configFile = AppDomain.CurrentDomain.BaseDirectory + "/config.json";
 
             if (File.Exists(configFile)) {
                 var configFileText = File.ReadAllText(configFile);
@@ -91,7 +96,7 @@ namespace TaskProcessor {
             }
         }
 
-        private void StartSignalr() {
+        private void StartCommunication() {
             // TODO: create own url builder
             var hostBuilder = new StringBuilder();
             hostBuilder.Append(_configuration.Https ? "https" : "http")
@@ -101,10 +106,8 @@ namespace TaskProcessor {
                        .Append(_configuration.Port);
 
             try {
-                using (WebApp.Start(hostBuilder.ToString(), _server.Start)) {
-                    Console.WriteLine("Server is started");
-                    Console.ReadLine();
-                }
+                _communicationServer = WebApp.Start(hostBuilder.ToString(), _server.Start);
+                Console.WriteLine("Server is started");
             } catch (TargetInvocationException exception) {
                 if (exception.InnerException.GetType() == typeof(SocketException)) {
                     Console.WriteLine("Port is already in use!");
