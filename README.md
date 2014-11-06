@@ -15,3 +15,10 @@ git clone https://github.com/LinuxDoku/TaskProcessor
 cd TaskProcessor
 xbuild
 ```
+
+## Run
+On a linux box simply tun the console host:
+```
+mono TaskProcessor.ConsoleHost/bin/Debug/TaskProcessor.ConsoleHost.exe
+```
+A binary with bundled mono runtime is in development.
